@@ -1,0 +1,30 @@
+// FIRESTORE RULES — publish in Firebase Console > Firestore > Rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null &&
+        request.auth.token.email == "YOUR_ADMIN_EMAIL";
+    }
+    match /gallery/{photoId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}
+
+// STORAGE RULES — publish separately in Firebase Console > Storage > Rules
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin() {
+      return request.auth != null &&
+        request.auth.token.email == "YOUR_ADMIN_EMAIL";
+    }
+    match /gallery/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && request.resource.size < 8 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
