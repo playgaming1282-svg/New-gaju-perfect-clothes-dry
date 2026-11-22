@@ -417,6 +417,16 @@ footer p{font-size:12px;color:var(--bw-gray)}
   padding:12px 15px;border-radius:11px;font-size:12px;margin-bottom:18px;line-height:1.6;
   background:var(--c1-soft);border:1px solid #b8ded9;color:#0b4d47
 }
+.auth-box{
+  background:var(--bw-offwhite);border:1px solid var(--bw-line);border-radius:16px;
+  padding:22px;margin-bottom:10px
+}
+.auth-box h4{font:800 16px 'Noto Sans Devanagari',Manrope,sans-serif;margin-bottom:6px}
+.auth-box p{font-size:12.5px;color:var(--bw-gray);margin-bottom:16px;line-height:1.6}
+.auth-error{
+  background:#fee9e9;border:1px solid #f7caca;color:#b42323;padding:10px 13px;
+  border-radius:9px;font-size:12px;font-weight:700;margin-bottom:14px;display:none
+}
 .admin-tabs{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
 .admin-tab{
   padding:9px 16px;border-radius:9px;border:1px solid #cfd5d8;background:#fff;
@@ -757,99 +767,126 @@ footer p{font-size:12px;color:var(--bw-gray)}
 
 <a class="float float-call" href="tel:+919179622121" aria-label="Call Cloth Dry System Pune">☎</a>
 
-<!-- ADMIN PANEL MODAL -->
+<!-- ADMIN PANEL MODAL WITH FIREBASE GMAIL + PASSWORD LOGIN -->
 <div class="admin-overlay" id="adminOverlay">
   <div class="admin-modal">
     <div class="admin-head">
       <div>
         <h3>Firebase Media Admin Panel</h3>
-        <small style="color:var(--bw-gray)">10 Hero Slideshow photos &amp; About / Package photos manage karein</small>
+        <small style="color:var(--bw-gray)">Apni Firebase Gmail aur Password se login karke photos manage karein</small>
       </div>
       <button type="button" class="close-admin" id="closeAdminBtn" aria-label="Close">✕</button>
     </div>
 
     <div class="admin-status" id="firebaseStatusBanner">Firebase status check ho raha hai...</div>
 
-    <div class="admin-tabs">
-      <button type="button" class="admin-tab active" data-tab="hero">1st Page Slideshow (10 Slots)</button>
-      <button type="button" class="admin-tab" data-tab="cards">About &amp; Package Photos</button>
-    </div>
-
-    <!-- TAB 1: HERO 10 SLIDES -->
-    <div id="tabHero">
-      <form class="admin-form" id="addHeroSlideForm">
+    <!-- FIREBASE EMAIL & PASSWORD LOGIN BOX -->
+    <div class="auth-box" id="firebaseAuthBox">
+      <h4>Firebase Admin Login (Gmail &amp; Password)</h4>
+      <p>Apni Firebase account wali Gmail ID aur Password daal kar login karein.</p>
+      <div class="auth-error" id="authErrorBox"></div>
+      <form class="admin-form" id="firebaseLoginForm" style="margin-bottom:0">
         <div>
-          <label>Slot चुनें (01 से 10)</label>
-          <select id="heroSlotSelect"></select>
+          <label>Firebase Gmail ID</label>
+          <input type="email" id="loginEmailInput" placeholder="aapki-gmail@gmail.com" autocomplete="email" required>
         </div>
         <div>
-          <label>Slide Tag / Label</label>
-          <input type="text" id="heroTagInput" placeholder="e.g. BALCONY PULLEY SETUP" required>
+          <label>Firebase Password</label>
+          <input type="password" id="loginPasswordInput" placeholder="Apna password daalein" autocomplete="current-password" required>
         </div>
-        <div class="full">
-          <label>Slide Heading</label>
-          <input type="text" id="heroTitleInput" placeholder="e.g. Ceiling Cloth Drying System" required>
-        </div>
-        <div class="full">
-          <label>Photo Description (Hindi / English)</label>
-          <textarea id="heroDescInput" placeholder="Is photo ke baare mein description likhein..." required></textarea>
-        </div>
-        <div>
-          <label>Photo File Upload करें</label>
-          <input type="file" id="heroFileInput" accept="image/*">
-        </div>
-        <div>
-          <label>या Image URL डालें (Firebase Storage / Link)</label>
-          <input type="url" id="heroUrlInput" placeholder="https://...">
-        </div>
-        <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
-          <button type="submit" class="btn btn-dark" id="saveHeroSlideBtn">SAVE SLIDE PHOTO</button>
-          <button type="button" class="btn btn-outline" id="resetHero10Btn">Reset All 10 Slots</button>
+        <div class="full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button type="submit" class="btn btn-dark" id="firebaseLoginBtn">LOGIN WITH FIREBASE</button>
         </div>
       </form>
-
-      <h4 style="font:800 14px Manrope;margin-bottom:10px">10 Slideshow Slots</h4>
-      <div class="admin-list" id="adminHeroList"></div>
     </div>
 
-    <!-- TAB 2: ABOUT & PACKAGE PHOTOS -->
-    <div id="tabCards" style="display:none">
-      <form class="admin-form" id="updateCardPhotoForm">
-        <div class="full">
-          <label>Section / Package Photo Slot चुनें</label>
-          <select id="cardTargetSelect"></select>
-        </div>
-        <div>
-          <label>Photo File Upload करें</label>
-          <input type="file" id="cardFileInput" accept="image/*">
-        </div>
-        <div>
-          <label>या Image URL डालें (Firebase Storage / Link)</label>
-          <input type="url" id="cardUrlInput" placeholder="https://...">
-        </div>
-        <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
-          <button type="submit" class="btn btn-accent1" id="saveCardPhotoBtn">UPDATE SECTION PHOTO</button>
-          <button type="button" class="btn btn-outline" id="clearCardPhotoBtn">Clear Photo to Blank Slot</button>
-        </div>
-      </form>
+    <!-- PROTECTED ADMIN CONTROLS (SHOWN AFTER FIREBASE LOGIN) -->
+    <div id="adminDashboardContent" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+        <span style="font-size:12px;font-weight:700;color:var(--c1)" id="loggedInUserLabel"></span>
+        <button type="button" class="del-btn" id="firebaseLogoutBtn">Logout</button>
+      </div>
 
-      <h4 style="font:800 14px Manrope;margin-bottom:10px">About &amp; Package Photo Slots</h4>
-      <div class="admin-list" id="adminCardList"></div>
+      <div class="admin-tabs">
+        <button type="button" class="admin-tab active" data-tab="hero">1st Page Slideshow (10 Slots)</button>
+        <button type="button" class="admin-tab" data-tab="cards">About &amp; Package Photos</button>
+      </div>
+
+      <!-- TAB 1: HERO 10 SLIDES -->
+      <div id="tabHero">
+        <form class="admin-form" id="addHeroSlideForm">
+          <div>
+            <label>Slot चुनें (01 से 10)</label>
+            <select id="heroSlotSelect"></select>
+          </div>
+          <div>
+            <label>Slide Tag / Label</label>
+            <input type="text" id="heroTagInput" placeholder="e.g. BALCONY PULLEY SETUP" required>
+          </div>
+          <div class="full">
+            <label>Slide Heading</label>
+            <input type="text" id="heroTitleInput" placeholder="e.g. Ceiling Cloth Drying System" required>
+          </div>
+          <div class="full">
+            <label>Photo Description (Hindi / English)</label>
+            <textarea id="heroDescInput" placeholder="Is photo ke baare mein description likhein..." required></textarea>
+          </div>
+          <div>
+            <label>Photo File Upload करें</label>
+            <input type="file" id="heroFileInput" accept="image/*">
+          </div>
+          <div>
+            <label>या Image URL डालें (Firebase Storage / Link)</label>
+            <input type="url" id="heroUrlInput" placeholder="https://...">
+          </div>
+          <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="submit" class="btn btn-dark" id="saveHeroSlideBtn">SAVE SLIDE PHOTO</button>
+            <button type="button" class="btn btn-outline" id="resetHero10Btn">Reset All 10 Slots</button>
+          </div>
+        </form>
+
+        <h4 style="font:800 14px Manrope;margin-bottom:10px">10 Slideshow Slots</h4>
+        <div class="admin-list" id="adminHeroList"></div>
+      </div>
+
+      <!-- TAB 2: ABOUT & PACKAGE PHOTOS -->
+      <div id="tabCards" style="display:none">
+        <form class="admin-form" id="updateCardPhotoForm">
+          <div class="full">
+            <label>Section / Package Photo Slot चुनें</label>
+            <select id="cardTargetSelect"></select>
+          </div>
+          <div>
+            <label>Photo File Upload करें</label>
+            <input type="file" id="cardFileInput" accept="image/*">
+          </div>
+          <div>
+            <label>या Image URL डालें (Firebase Storage / Link)</label>
+            <input type="url" id="cardUrlInput" placeholder="https://...">
+          </div>
+          <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="submit" class="btn btn-accent1" id="saveCardPhotoBtn">UPDATE SECTION PHOTO</button>
+            <button type="button" class="btn btn-outline" id="clearCardPhotoBtn">Clear Photo to Blank Slot</button>
+          </div>
+        </form>
+
+        <h4 style="font:800 14px Manrope;margin-bottom:10px">About &amp; Package Photo Slots</h4>
+        <div class="admin-list" id="adminCardList"></div>
+      </div>
     </div>
   </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
 
 <script>
 /* =====================================================================
-   1. FIREBASE CONFIG & ADMIN PIN (cloth-dry-system-pune)
+   1. FIREBASE CONFIG (cloth-dry-system-pune)
    ===================================================================== */
-const ADMIN_PIN = "1234";
-
 const firebaseConfig = {
   apiKey: "AIzaSyDhUROkgEsoi-82PWJSFA8X83syFO33KWc",
   authDomain: "cloth-dry-system-pune.firebaseapp.com",
@@ -860,14 +897,17 @@ const firebaseConfig = {
   measurementId: "G-5QX2KK3DXW"
 };
 
+let auth = null;
 let db = null;
 let storage = null;
 let analytics = null;
 let firebaseReady = false;
+let currentAuthUser = null;
 
 try {
   if (typeof firebase !== "undefined") {
     const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
     db = firebase.firestore();
     storage = firebase.storage();
     if (firebase.analytics && typeof window !== "undefined") {
@@ -877,7 +917,7 @@ try {
     firebaseReady = true;
   }
 } catch (err) {
-  console.warn("Firebase init fallback:", err);
+  console.warn("Firebase init warning:", err);
   firebaseReady = false;
 }
 
@@ -1217,10 +1257,14 @@ function saveLocalCards() {
 }
 
 /* =====================================================================
-   7. ADMIN PANEL (ERROR-FREE PIN LOGIN + 10 HERO + PACKAGE PHOTOS)
+   7. ADMIN PANEL (FIREBASE EMAIL + PASSWORD AUTH)
    ===================================================================== */
 const adminOverlay = document.getElementById("adminOverlay");
 const statusBanner = document.getElementById("firebaseStatusBanner");
+const authBox = document.getElementById("firebaseAuthBox");
+const authErrorBox = document.getElementById("authErrorBox");
+const adminDashboardContent = document.getElementById("adminDashboardContent");
+const loggedInUserLabel = document.getElementById("loggedInUserLabel");
 const heroSlotSelect = document.getElementById("heroSlotSelect");
 const cardTargetSelect = document.getElementById("cardTargetSelect");
 
@@ -1232,6 +1276,88 @@ heroSlotSelect.innerHTML = Array.from({ length: 10 }, (_, i) => {
 cardTargetSelect.innerHTML = CARD_PHOTO_SLOTS.map(c =>
   `<option value="${c.id}">${escapeHtml(c.label)}</option>`
 ).join("");
+
+function updateAuthUI() {
+  if (currentAuthUser) {
+    authBox.style.display = "none";
+    adminDashboardContent.style.display = "block";
+    loggedInUserLabel.textContent = "Logged in as: " + (currentAuthUser.email || "Firebase Admin");
+    statusBanner.innerHTML = "<b>Firebase Authenticated (cloth-dry-system-pune):</b> Aap photos aur descriptions update kar sakte hain.";
+    syncFormWithSelectedSlot();
+    populateAdminLists();
+  } else {
+    authBox.style.display = "block";
+    adminDashboardContent.style.display = "none";
+    statusBanner.innerHTML = firebaseReady
+      ? "<b>Firebase Auth Ready (cloth-dry-system-pune):</b> Kripya apni Firebase Gmail aur Password se login karein."
+      : "<b>Firebase Status:</b> Firebase SDK load check ho raha hai.";
+  }
+}
+
+if (firebaseReady && auth) {
+  auth.onAuthStateChanged(user => {
+    currentAuthUser = user || null;
+    updateAuthUI();
+  });
+}
+
+function showAuthError(msg) {
+  authErrorBox.textContent = msg;
+  authErrorBox.style.display = "block";
+}
+
+function hideAuthError() {
+  authErrorBox.textContent = "";
+  authErrorBox.style.display = "none";
+}
+
+document.getElementById("firebaseLoginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  hideAuthError();
+  const email = document.getElementById("loginEmailInput").value.trim();
+  const password = document.getElementById("loginPasswordInput").value;
+  const loginBtn = document.getElementById("firebaseLoginBtn");
+
+  if (!firebaseReady || !auth) {
+    showAuthError("Firebase Authentication abhi ready nahi hai. Page refresh karke dobara try karein.");
+    return;
+  }
+
+  loginBtn.disabled = true;
+  loginBtn.textContent = "LOGGING IN...";
+
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+    document.getElementById("loginPasswordInput").value = "";
+  } catch (err) {
+    let friendlyMsg = "Login nahi ho paya. Apni Gmail aur Password check karein.";
+    if (err && err.code === "auth/invalid-credential") {
+      friendlyMsg = "Galat Gmail ya Password. Kripya sahi Firebase email aur password daalein.";
+    } else if (err && err.code === "auth/user-not-found") {
+      friendlyMsg = "Is Gmail ID ka Firebase Authentication user nahi mila. Firebase Console -> Authentication mein user add karein.";
+    } else if (err && err.code === "auth/wrong-password") {
+      friendlyMsg = "Password galat hai. Sahi password daalein.";
+    } else if (err && err.code === "auth/invalid-email") {
+      friendlyMsg = "Gmail ID ka format sahi nahi hai.";
+    } else if (err && err.code === "auth/operation-not-allowed") {
+      friendlyMsg = "Firebase Console mein Email/Password sign-in enabled nahi hai. Authentication -> Sign-in method mein Email/Password enable karein.";
+    } else if (err && err.message) {
+      friendlyMsg = err.message;
+    }
+    showAuthError(friendlyMsg);
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = "LOGIN WITH FIREBASE";
+  }
+});
+
+document.getElementById("firebaseLogoutBtn").addEventListener("click", async () => {
+  if (firebaseReady && auth) {
+    try { await auth.signOut(); } catch {}
+  }
+  currentAuthUser = null;
+  updateAuthUI();
+});
 
 function syncFormWithSelectedSlot() {
   const idx = Number(heroSlotSelect.value) || 0;
@@ -1254,27 +1380,9 @@ document.querySelectorAll(".admin-tab").forEach(tabBtn => {
 });
 
 function openAdminPanel() {
-  try {
-    const pin = window.prompt("Admin PIN daalein (1234):");
-    if (pin === null) return;
-    if (String(pin).trim() !== ADMIN_PIN) {
-      window.alert("PIN galat hai. Kripya sahi PIN daalein.");
-      return;
-    }
-    statusBanner.innerHTML = firebaseReady
-      ? "<b>Firebase Connected (cloth-dry-system-pune):</b> Photos aur descriptions Firebase Firestore &amp; Storage mein save honge."
-      : "<b>Local Backup Active:</b> Photos browser storage mein save honge.";
-
-    syncFormWithSelectedSlot();
-    populateAdminLists();
-    adminOverlay.classList.add("open");
-  } catch (err) {
-    console.warn("Admin open fallback:", err);
-    statusBanner.innerHTML = "<b>Admin Panel Ready:</b> Aap photos aur details update kar sakte hain.";
-    syncFormWithSelectedSlot();
-    populateAdminLists();
-    adminOverlay.classList.add("open");
-  }
+  hideAuthError();
+  updateAuthUI();
+  adminOverlay.classList.add("open");
 }
 
 document.getElementById("openAdminBtn").addEventListener("click", openAdminPanel);
@@ -1305,6 +1413,10 @@ async function resolveImageInput(fileInputId, urlInputId, folder) {
 
 document.getElementById("addHeroSlideForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+  if (!currentAuthUser) {
+    showAuthError("Pehle Firebase Gmail aur Password se login karein.");
+    return;
+  }
   const btn = document.getElementById("saveHeroSlideBtn");
   const idx = Number(heroSlotSelect.value) || 0;
   const tag = document.getElementById("heroTagInput").value.trim();
@@ -1349,6 +1461,7 @@ document.getElementById("addHeroSlideForm").addEventListener("submit", async (e)
 });
 
 document.getElementById("resetHero10Btn").addEventListener("click", async () => {
+  if (!currentAuthUser) return;
   if (!window.confirm("Sabhi 10 slideshow slots ko reset karna hai?")) return;
   try { localStorage.removeItem(LOCAL_HERO_KEY); } catch {}
   heroSlides = buildDefault10Slides();
@@ -1369,6 +1482,10 @@ document.getElementById("resetHero10Btn").addEventListener("click", async () => 
 
 document.getElementById("updateCardPhotoForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+  if (!currentAuthUser) {
+    showAuthError("Pehle Firebase Gmail aur Password se login karein.");
+    return;
+  }
   const btn = document.getElementById("saveCardPhotoBtn");
   const targetId = cardTargetSelect.value;
   btn.disabled = true;
@@ -1404,6 +1521,7 @@ document.getElementById("updateCardPhotoForm").addEventListener("submit", async 
 });
 
 document.getElementById("clearCardPhotoBtn").addEventListener("click", async () => {
+  if (!currentAuthUser) return;
   const targetId = cardTargetSelect.value;
   delete cardPhotos[targetId];
   saveLocalCards();
@@ -1419,6 +1537,7 @@ document.getElementById("clearCardPhotoBtn").addEventListener("click", async () 
 });
 
 window.clearHeroSlot = async function(idx) {
+  if (!currentAuthUser) return;
   const defaults = buildDefault10Slides()[idx];
   heroSlides[idx] = defaults;
   saveLocalHero();
@@ -1520,6 +1639,7 @@ document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 /* INIT */
 loadAllMedia();
 restartAutoSlide();
+updateAuthUI();
 </script>
 
 </body>
