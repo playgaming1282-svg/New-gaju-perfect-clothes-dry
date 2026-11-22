@@ -129,7 +129,7 @@ button{cursor:pointer}
 .header-cta:hover{background:var(--bw-black);transform:translateY(-2px)}
 .menu-btn{display:none;border:0;background:none;font-size:25px;color:var(--bw-black)}
 
-/* HERO + AUTOMATIC 10-PHOTO FIREBASE SLIDESHOW */
+/* HERO + AUTOMATIC 10-PHOTO SLIDESHOW */
 .hero{
   min-height:660px;
   background:radial-gradient(circle at 86% 15%,var(--c1-soft) 0%,transparent 44%),
@@ -167,7 +167,7 @@ button{cursor:pointer}
   color:var(--c1);display:grid;place-items:center;font-size:11px;font-weight:900
 }
 
-/* SLIDER (10 FIREBASE SLOTS) */
+/* SLIDER (10 SLOTS) */
 .slider-wrap{position:relative;min-width:0}
 .slider{
   height:480px;border-radius:24px;overflow:hidden;position:relative;
@@ -530,7 +530,7 @@ footer p{font-size:12px;color:var(--bw-gray)}
 
 <main>
 
-<!-- HERO + AUTOMATIC 10-PHOTO FIREBASE SLIDESHOW -->
+<!-- HERO + AUTOMATIC 10-PHOTO SLIDESHOW -->
 <section class="hero" id="home">
   <div class="hero-copy">
     <div class="kicker">BALCONY &amp; CEILING DRYING SOLUTION</div>
@@ -549,7 +549,7 @@ footer p{font-size:12px;color:var(--bw-gray)}
     </div>
   </div>
 
-  <!-- 1ST PAGE AUTOMATIC SLIDESHOW (10 FIREBASE SLOTS) -->
+  <!-- 1ST PAGE AUTOMATIC SLIDESHOW (10 SLOTS) -->
   <div class="slider-wrap" id="sliderWrap">
     <div class="slider" id="heroSlider">
       <div class="slide-progress-track">
@@ -576,7 +576,7 @@ footer p{font-size:12px;color:var(--bw-gray)}
   <div class="stat"><b>3 Cities</b><span>Pune • PCMC • Mumbai</span></div>
 </div>
 
-<!-- ABOUT US SECTION WITH FIREBASE PHOTO SLOT -->
+<!-- ABOUT US SECTION WITH PHOTO SLOT -->
 <section class="section about" id="about">
   <div class="about-grid">
     <div class="about-visual reveal">
@@ -615,12 +615,12 @@ footer p{font-size:12px;color:var(--bw-gray)}
   </div>
 </section>
 
-<!-- PACKAGES & SERVICES SECTION (DESCRIPTIONS + FIREBASE PHOTO SLOTS, NO PRICE) -->
+<!-- PACKAGES & SERVICES SECTION (DESCRIPTIONS + PHOTO SLOTS, NO PRICE) -->
 <section class="section packages" id="services">
   <div class="kicker">PACKAGES &amp; हमारी सेवाएं</div>
   <div class="section-head">
     <h2>हर घर के लिए <em>सही</em><br>packages &amp; services.</h2>
-    <p>समझिए हमारी कौन-सी service और package किस काम आती है। हर card में अपनी Firebase photo add करने की जगह दी गई है।</p>
+    <p>समझिए हमारी कौन-सी service और package किस काम आती है। हर card में photo add करने की जगह दी गई है।</p>
   </div>
 
   <div class="package-grid" id="packagesGrid"></div>
@@ -772,35 +772,35 @@ footer p{font-size:12px;color:var(--bw-gray)}
   <div class="admin-modal">
     <div class="admin-head">
       <div>
-        <h3>Firebase Media Admin Panel</h3>
-        <small style="color:var(--bw-gray)">Apni Firebase Gmail aur Password se login karke photos manage karein</small>
+        <h3>Media Admin Panel</h3>
+        <small style="color:var(--bw-gray)">Gmail &amp; Password se login karke photos manage karein (No Paid Storage Needed)</small>
       </div>
       <button type="button" class="close-admin" id="closeAdminBtn" aria-label="Close">✕</button>
     </div>
 
-    <div class="admin-status" id="firebaseStatusBanner">Firebase status check ho raha hai...</div>
+    <div class="admin-status" id="firebaseStatusBanner">Status check ho raha hai...</div>
 
     <!-- FIREBASE EMAIL & PASSWORD LOGIN BOX -->
     <div class="auth-box" id="firebaseAuthBox">
-      <h4>Firebase Admin Login (Gmail &amp; Password)</h4>
+      <h4>Admin Login (Gmail &amp; Password)</h4>
       <p>Apni Firebase account wali Gmail ID aur Password daal kar login karein.</p>
       <div class="auth-error" id="authErrorBox"></div>
       <form class="admin-form" id="firebaseLoginForm" style="margin-bottom:0">
         <div>
-          <label>Firebase Gmail ID</label>
+          <label>Gmail ID</label>
           <input type="email" id="loginEmailInput" placeholder="aapki-gmail@gmail.com" autocomplete="email" required>
         </div>
         <div>
-          <label>Firebase Password</label>
+          <label>Password</label>
           <input type="password" id="loginPasswordInput" placeholder="Apna password daalein" autocomplete="current-password" required>
         </div>
         <div class="full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <button type="submit" class="btn btn-dark" id="firebaseLoginBtn">LOGIN WITH FIREBASE</button>
+          <button type="submit" class="btn btn-dark" id="firebaseLoginBtn">LOGIN</button>
         </div>
       </form>
     </div>
 
-    <!-- PROTECTED ADMIN CONTROLS (SHOWN AFTER FIREBASE LOGIN) -->
+    <!-- PROTECTED ADMIN CONTROLS -->
     <div id="adminDashboardContent" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px">
         <span style="font-size:12px;font-weight:700;color:var(--c1)" id="loggedInUserLabel"></span>
@@ -832,11 +832,11 @@ footer p{font-size:12px;color:var(--bw-gray)}
             <textarea id="heroDescInput" placeholder="Is photo ke baare mein description likhein..." required></textarea>
           </div>
           <div>
-            <label>Photo File Upload करें</label>
+            <label>Photo File Upload करें (JS Resize)</label>
             <input type="file" id="heroFileInput" accept="image/*">
           </div>
           <div>
-            <label>या Image URL डालें (Firebase Storage / Link)</label>
+            <label>या Image URL डालें</label>
             <input type="url" id="heroUrlInput" placeholder="https://...">
           </div>
           <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
@@ -857,11 +857,11 @@ footer p{font-size:12px;color:var(--bw-gray)}
             <select id="cardTargetSelect"></select>
           </div>
           <div>
-            <label>Photo File Upload करें</label>
+            <label>Photo File Upload करें (JS Resize)</label>
             <input type="file" id="cardFileInput" accept="image/*">
           </div>
           <div>
-            <label>या Image URL डालें (Firebase Storage / Link)</label>
+            <label>या Image URL डालें</label>
             <input type="url" id="cardUrlInput" placeholder="https://...">
           </div>
           <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
@@ -880,12 +880,11 @@ footer p{font-size:12px;color:var(--bw-gray)}
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
 
 <script>
 /* =====================================================================
-   1. FIREBASE CONFIG (cloth-dry-system-pune)
+   1. FIREBASE CONFIG (NO PAID STORAGE REQUIRED — USES FIRESTORE + JS)
    ===================================================================== */
 const firebaseConfig = {
   apiKey: "AIzaSyDhUROkgEsoi-82PWJSFA8X83syFO33KWc",
@@ -899,8 +898,6 @@ const firebaseConfig = {
 
 let auth = null;
 let db = null;
-let storage = null;
-let analytics = null;
 let firebaseReady = false;
 let currentAuthUser = null;
 
@@ -909,10 +906,8 @@ try {
     const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
     auth = firebase.auth();
     db = firebase.firestore();
-    storage = firebase.storage();
     if (firebase.analytics && typeof window !== "undefined") {
       firebase.analytics().logEvent("page_view");
-      analytics = firebase.analytics();
     }
     firebaseReady = true;
   }
@@ -922,7 +917,7 @@ try {
 }
 
 /* =====================================================================
-   2. 10 RESERVED FIREBASE SLIDES FOR 1ST PAGE SLIDESHOW
+   2. 10 RESERVED SLIDES FOR 1ST PAGE SLIDESHOW
    ===================================================================== */
 function buildDefault10Slides() {
   return Array.from({ length: 10 }, (_, idx) => {
@@ -930,9 +925,9 @@ function buildDefault10Slides() {
     return {
       id: "hero-slot-" + num,
       slotIndex: idx,
-      tag: `FIREBASE SLIDE ${num} OF 10`,
+      tag: `SLIDE ${num} OF 10`,
       title: `Slideshow फोटो ${num} — Title यहाँ डालें`,
-      desc: `Firebase photo slot ${num} — यहाँ अपनी real photo और description जोड़ें ताकि customers को काम साफ समझ आए।`,
+      desc: `Photo slot ${num} — यहाँ अपनी real photo और description जोड़ें ताकि customers को काम साफ समझ आए।`,
       imageUrl: ""
     };
   });
@@ -1061,7 +1056,7 @@ function renderHeroSlides() {
               ? `<img src="${escapeHtml(s.imageUrl)}" alt="${escapeHtml(s.title)}">`
               : `<div class="firebase-slot-box">
                    <div class="slot-ring">${num}</div>
-                   <strong>FIREBASE PHOTO SLOT ${num} / 10</strong>
+                   <strong>PHOTO SLOT ${num} / 10</strong>
                    <small>Slide ${num} के लिए अपनी real photo, heading aur description Admin Panel से जोड़ें।</small>
                  </div>`
           }
@@ -1080,9 +1075,7 @@ function renderHeroSlides() {
   `).join("");
 
   dotsEl.querySelectorAll("button").forEach(btn => {
-    btn.addEventListener("click", () => {
-      goToSlide(Number(btn.dataset.idx));
-    });
+    btn.addEventListener("click", () => goToSlide(Number(btn.dataset.idx)));
   });
 
   countEl.textContent = `${String(currentSlide + 1).padStart(2, "0")} / ${String(heroSlides.length).padStart(2, "0")}`;
@@ -1139,7 +1132,7 @@ document.getElementById("nextSlide").addEventListener("click", () => goToSlide(c
 document.getElementById("prevSlide").addEventListener("click", () => goToSlide(currentSlide - 1));
 
 /* =====================================================================
-   5. RENDER ABOUT & PACKAGE CARDS (WITH FIREBASE PHOTO SLOTS)
+   5. RENDER ABOUT & PACKAGE CARDS (WITH PHOTO SLOTS)
    ===================================================================== */
 function renderCardSections() {
   const aboutBox = document.getElementById("aboutPhotoSlot");
@@ -1147,9 +1140,9 @@ function renderCardSections() {
   aboutBox.innerHTML = aboutUrl
     ? `<img src="${escapeHtml(aboutUrl)}" alt="Cloth Dry System Pune About">`
     : `<div class="photo-slot-placeholder">
-         <span class="tag-pill">FIREBASE PHOTO SLOT • ABOUT US</span>
+         <span class="tag-pill">PHOTO SLOT • ABOUT US</span>
          <strong>यहाँ अपनी Photo जोड़ें</strong>
-         <small>Admin Panel → About &amp; Package Photos से अपनी Firebase image add करें।</small>
+         <small>Admin Panel → About &amp; Package Photos से photo add करें।</small>
        </div>`;
 
   const pkgGrid = document.getElementById("packagesGrid");
@@ -1164,7 +1157,7 @@ function renderCardSections() {
             imgUrl
               ? `<img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(p.title)}">`
               : `<div class="photo-slot-placeholder">
-                   <span class="tag-pill">FIREBASE PHOTO SLOT ${slotNum}</span>
+                   <span class="tag-pill">PHOTO SLOT ${slotNum}</span>
                    <strong>${escapeHtml(p.title)}</strong>
                    <small>यहाँ इस package/service की photo add करने की जगह है।</small>
                  </div>`
@@ -1188,7 +1181,7 @@ function renderCardSections() {
 }
 
 /* =====================================================================
-   6. FIREBASE SYNC + LOCAL STORAGE FALLBACK
+   6. FIRESTORE SYNC + LOCAL STORAGE FALLBACK (NO PAID STORAGE)
    ===================================================================== */
 const LOCAL_HERO_KEY = "cds_pune_60_40_hero_slides_v1";
 const LOCAL_CARDS_KEY = "cds_pune_60_40_card_photos_v1";
@@ -1223,9 +1216,7 @@ function loadAllMedia() {
           saveLocalHero();
           renderHeroSlides();
         },
-        err => {
-          console.warn("Firestore hero listener fallback:", err);
-        }
+        err => console.warn("Firestore hero listener fallback:", err)
       );
 
       db.collection("site_photos").onSnapshot(
@@ -1239,9 +1230,7 @@ function loadAllMedia() {
           saveLocalCards();
           renderCardSections();
         },
-        err => {
-          console.warn("Firestore site_photos listener fallback:", err);
-        }
+        err => console.warn("Firestore site_photos listener fallback:", err)
       );
     } catch (err) {
       console.warn("Firestore sync error:", err);
@@ -1257,7 +1246,47 @@ function saveLocalCards() {
 }
 
 /* =====================================================================
-   7. ADMIN PANEL (FIREBASE EMAIL + PASSWORD AUTH)
+   7. JAVASCRIPT IMAGE COMPRESSION (NO PAID STORAGE NEEDED)
+   ===================================================================== */
+function compressImageFileToDataUrl(file, maxWidth = 900, quality = 0.68) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if (width > maxWidth) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        const compressedUrl = canvas.toDataURL("image/jpeg", quality);
+        resolve(compressedUrl);
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function resolveImageInput(fileInputId, urlInputId) {
+  const file = document.getElementById(fileInputId).files[0];
+  const url = document.getElementById(urlInputId).value.trim();
+  if (file) {
+    return await compressImageFileToDataUrl(file, 900, 0.68);
+  }
+  return url;
+}
+
+/* =====================================================================
+   8. ADMIN PANEL (FIREBASE EMAIL + PASSWORD AUTH)
    ===================================================================== */
 const adminOverlay = document.getElementById("adminOverlay");
 const statusBanner = document.getElementById("firebaseStatusBanner");
@@ -1281,16 +1310,16 @@ function updateAuthUI() {
   if (currentAuthUser) {
     authBox.style.display = "none";
     adminDashboardContent.style.display = "block";
-    loggedInUserLabel.textContent = "Logged in as: " + (currentAuthUser.email || "Firebase Admin");
-    statusBanner.innerHTML = "<b>Firebase Authenticated (cloth-dry-system-pune):</b> Aap photos aur descriptions update kar sakte hain.";
+    loggedInUserLabel.textContent = "Logged in as: " + (currentAuthUser.email || "Admin");
+    statusBanner.innerHTML = "<b>JS Compression + Firestore Active (No Paid Storage Needed):</b> Photo apne aap compress hokar save hogi.";
     syncFormWithSelectedSlot();
     populateAdminLists();
   } else {
     authBox.style.display = "block";
     adminDashboardContent.style.display = "none";
     statusBanner.innerHTML = firebaseReady
-      ? "<b>Firebase Auth Ready (cloth-dry-system-pune):</b> Kripya apni Firebase Gmail aur Password se login karein."
-      : "<b>Firebase Status:</b> Firebase SDK load check ho raha hai.";
+      ? "<b>Firebase Login Ready:</b> Kripya apni Gmail aur Password se login karein."
+      : "<b>Status:</b> Firebase SDK check ho raha hai.";
   }
 }
 
@@ -1332,22 +1361,22 @@ document.getElementById("firebaseLoginForm").addEventListener("submit", async (e
   } catch (err) {
     let friendlyMsg = "Login nahi ho paya. Apni Gmail aur Password check karein.";
     if (err && err.code === "auth/invalid-credential") {
-      friendlyMsg = "Galat Gmail ya Password. Kripya sahi Firebase email aur password daalein.";
+      friendlyMsg = "Galat Gmail ya Password. Kripya sahi email aur password daalein.";
     } else if (err && err.code === "auth/user-not-found") {
-      friendlyMsg = "Is Gmail ID ka Firebase Authentication user nahi mila. Firebase Console -> Authentication mein user add karein.";
+      friendlyMsg = "Is Gmail ID ka Firebase Authentication user nahi mila.";
     } else if (err && err.code === "auth/wrong-password") {
       friendlyMsg = "Password galat hai. Sahi password daalein.";
     } else if (err && err.code === "auth/invalid-email") {
       friendlyMsg = "Gmail ID ka format sahi nahi hai.";
     } else if (err && err.code === "auth/operation-not-allowed") {
-      friendlyMsg = "Firebase Console mein Email/Password sign-in enabled nahi hai. Authentication -> Sign-in method mein Email/Password enable karein.";
+      friendlyMsg = "Firebase Console mein Email/Password sign-in enabled nahi hai.";
     } else if (err && err.message) {
       friendlyMsg = err.message;
     }
     showAuthError(friendlyMsg);
   } finally {
     loginBtn.disabled = false;
-    loginBtn.textContent = "LOGIN WITH FIREBASE";
+    loginBtn.textContent = "LOGIN";
   }
 });
 
@@ -1389,32 +1418,10 @@ document.getElementById("openAdminBtn").addEventListener("click", openAdminPanel
 document.getElementById("closeAdminBtn").addEventListener("click", () => adminOverlay.classList.remove("open"));
 if (window.location.hash === "#admin") openAdminPanel();
 
-async function resolveImageInput(fileInputId, urlInputId, folder) {
-  const file = document.getElementById(fileInputId).files[0];
-  let url = document.getElementById(urlInputId).value.trim();
-  if (file) {
-    const localDataUrl = await fileToDataUrl(file);
-    if (firebaseReady && storage) {
-      try {
-        const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-        const ref = storage.ref(`${folder}/${Date.now()}_${cleanName}`);
-        await ref.put(file);
-        url = await ref.getDownloadURL();
-      } catch (storageErr) {
-        console.warn("Storage upload fallback to local image:", storageErr);
-        url = localDataUrl;
-      }
-    } else {
-      url = localDataUrl;
-    }
-  }
-  return url;
-}
-
 document.getElementById("addHeroSlideForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!currentAuthUser) {
-    showAuthError("Pehle Firebase Gmail aur Password se login karein.");
+    showAuthError("Pehle Gmail aur Password se login karein.");
     return;
   }
   const btn = document.getElementById("saveHeroSlideBtn");
@@ -1427,7 +1434,7 @@ document.getElementById("addHeroSlideForm").addEventListener("submit", async (e)
   btn.textContent = "SAVING...";
 
   try {
-    const newUrl = await resolveImageInput("heroFileInput", "heroUrlInput", "hero_10_slides");
+    const newUrl = await resolveImageInput("heroFileInput", "heroUrlInput");
     const finalUrl = newUrl || (heroSlides[idx] ? heroSlides[idx].imageUrl : "");
     const payload = {
       slotIndex: idx,
@@ -1443,17 +1450,15 @@ document.getElementById("addHeroSlideForm").addEventListener("submit", async (e)
     renderHeroSlides();
 
     if (firebaseReady && db) {
-      try {
-        await db.collection("hero_10_slides").doc(heroSlides[idx].id).set(payload, { merge: true });
-      } catch (fsErr) {
-        console.warn("Firestore save fallback:", fsErr);
-      }
+      await db.collection("hero_10_slides").doc(heroSlides[idx].id).set(payload, { merge: true });
     }
 
     document.getElementById("heroFileInput").value = "";
     goToSlide(idx);
+    window.alert("Slide photo save ho gayi!");
   } catch (err) {
     console.warn("Slide save warning:", err);
+    window.alert("Photo save karte waqt dikkat aayi: " + (err && err.message ? err.message : "Dobara try karein"));
   } finally {
     btn.disabled = false;
     btn.textContent = "SAVE SLIDE PHOTO";
@@ -1483,7 +1488,7 @@ document.getElementById("resetHero10Btn").addEventListener("click", async () => 
 document.getElementById("updateCardPhotoForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!currentAuthUser) {
-    showAuthError("Pehle Firebase Gmail aur Password se login karein.");
+    showAuthError("Pehle Gmail aur Password se login karein.");
     return;
   }
   const btn = document.getElementById("saveCardPhotoBtn");
@@ -1492,7 +1497,7 @@ document.getElementById("updateCardPhotoForm").addEventListener("submit", async 
   btn.textContent = "UPDATING...";
 
   try {
-    const url = await resolveImageInput("cardFileInput", "cardUrlInput", "site_photos");
+    const url = await resolveImageInput("cardFileInput", "cardUrlInput");
     if (!url) {
       window.alert("Photo file चुनें या image URL डालें।");
       return;
@@ -1503,17 +1508,15 @@ document.getElementById("updateCardPhotoForm").addEventListener("submit", async 
     renderCardSections();
 
     if (firebaseReady && db) {
-      try {
-        await db.collection("site_photos").doc(targetId).set({ imageUrl: url, updatedAt: Date.now() }, { merge: true });
-      } catch (fsErr) {
-        console.warn("Firestore card photo fallback:", fsErr);
-      }
+      await db.collection("site_photos").doc(targetId).set({ imageUrl: url, updatedAt: Date.now() }, { merge: true });
     }
 
     document.getElementById("cardFileInput").value = "";
     document.getElementById("cardUrlInput").value = "";
+    window.alert("Section / Package photo update ho gayi!");
   } catch (err) {
     console.warn("Card photo warning:", err);
+    window.alert("Photo update karte waqt dikkat aayi: " + (err && err.message ? err.message : "Dobara try karein"));
   } finally {
     btn.disabled = false;
     btn.textContent = "UPDATE SECTION PHOTO";
@@ -1587,21 +1590,12 @@ function populateAdminLists() {
           }
           <div class="admin-meta">
             <b>${escapeHtml(c.label)}</b>
-            <small>${u ? "Firebase / Photo added" : "Blank photo slot"}</small>
+            <small>${u ? "Saved in Firestore / Local" : "Blank photo slot"}</small>
           </div>
         </div>
       `;
     }).join("");
   }
-}
-
-function fileToDataUrl(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
 }
 
 function escapeHtml(str) {
@@ -1613,7 +1607,7 @@ function escapeHtml(str) {
 }
 
 /* =====================================================================
-   8. DYNAMIC SCROLL PROGRESS, MENU & REVEAL ANIMATIONS
+   9. DYNAMIC SCROLL PROGRESS, MENU & REVEAL ANIMATIONS
    ===================================================================== */
 document.getElementById("year").textContent = new Date().getFullYear();
 
