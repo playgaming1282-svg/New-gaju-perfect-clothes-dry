@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0b0d0e">
 
 <title>Cloth Dry System Pune | Manual &amp; Ceiling Cloth Drying Systems</title>
-<meta name="description" content="Smart manual, ceiling pulley, and wall-mounted cloth drying systems for modern homes in Pune, Pimpri-Chinchwad and Mumbai.">
+<meta name="description" content="Smart manual, ceiling pulley, and wall-mounted cloth drying systems for homes in Pune, Pimpri-Chinchwad and Mumbai.">
 <meta name="robots" content="index, follow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,16 +15,18 @@
 <style>
 :root {
   --bw-black:#0b0d0e;
-  --bw-charcoal:#181b1d;
+  --bw-charcoal:#171a1c;
   --bw-white:#ffffff;
   --bw-offwhite:#f7f7f6;
-  --bw-gray:#666c70;
-  --bw-line:#e4e6e7;
+  --bw-gray:#5f6569;
+  --bw-line:#e3e6e8;
 
   /* 2 Chosen Accent Colours: Emerald Teal + Warm Amber Gold */
   --c1:#0f766e;
+  --c1-light:#5eead4;
   --c1-soft:#e6f4f2;
   --c2:#d97706;
+  --c2-light:#fbbf24;
   --c2-soft:#fef3e2;
 }
 
@@ -32,57 +34,108 @@
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;color:var(--bw-black);background:var(--bw-white);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-button,input,textarea{font:inherit}
+button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 
-/* SMOOTH SCROLL REVEAL */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+/* DYNAMIC SCROLL PROGRESS BAR */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;z-index:100;
+  background:linear-gradient(90deg,var(--c1),var(--c2-light),var(--c2));
+  transition:width .12s linear
+}
 
-/* TOP BAR */
+/* DYNAMIC SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px) scale(.99);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1)}
+
+/* ANNOUNCEMENT BAR */
 .announcement{
   background:var(--bw-black);color:#f3f4f4;padding:10px 6%;
   font-size:10px;letter-spacing:2px;font-weight:700;
   display:flex;justify-content:space-between;align-items:center
 }
 .announce-dot{
-  width:7px;height:7px;background:var(--c2);border-radius:50%;
-  display:inline-block;margin-right:8px;animation:pulse 1.8s infinite
+  width:7px;height:7px;background:var(--c2-light);border-radius:50%;
+  display:inline-block;margin-right:8px;animation:pulseDot 1.6s infinite
 }
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.35)}}
-.announcement i{color:var(--c1);filter:brightness(1.8);font-style:normal;margin:0 7px}
+@keyframes pulseDot{
+  0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 0 0 rgba(251,191,36,.7)}
+  50%{opacity:.7;transform:scale(1.2);box-shadow:0 0 0 6px rgba(251,191,36,0)}
+}
+.announcement i{color:var(--c1-light);font-style:normal;margin:0 7px}
 
-/* HEADER & AI PROFILE LOGO */
+/* HEADER & PROFILE LOGO */
 .header{
   height:82px;padding:0 6%;display:flex;align-items:center;
-  justify-content:space-between;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
   position:sticky;top:0;z-index:60;border-bottom:1px solid var(--bw-line)
 }
 .logo{display:flex;align-items:center;gap:12px}
 .logo-badge{
   width:46px;height:46px;border-radius:14px;
-  background:linear-gradient(135deg,#0b0d0e 0%,#1f2427 65%,#0f766e 100%);
-  display:grid;place-items:center;box-shadow:0 8px 20px rgba(11,13,14,.22);flex-shrink:0
+  background:linear-gradient(135deg,#0b0d0e 0%,#1c2225 60%,#0f766e 100%);
+  display:grid;place-items:center;box-shadow:0 8px 20px rgba(11,13,14,.22);flex-shrink:0;
+  transition:transform .3s ease
 }
+.logo:hover .logo-badge{transform:rotate(-4deg) scale(1.05)}
 .logo-words strong{display:block;font:800 13px Manrope;letter-spacing:.7px;color:var(--bw-black)}
 .logo-words small{font-size:9px;letter-spacing:3.5px;color:var(--c1);font-weight:800}
 .nav{display:flex;gap:24px;align-items:center}
-.nav a{font-size:12px;font-weight:700;color:#484d50;transition:.2s}
-.nav a:hover{color:var(--c1)}
-.header-cta{
-  background:var(--bw-black);color:#fff;padding:12px 18px;border-radius:9px;
-  font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:7px;transition:.25s
+.nav a{font-size:12px;font-weight:700;color:#464c50;position:relative;padding:4px 0;transition:.2s}
+.nav a:after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .25s ease
 }
-.header-cta:hover{background:var(--c1);transform:translateY(-2px)}
+.nav a:hover{color:var(--bw-black)}
+.nav a:hover:after{width:100%}
+
+/* WHATSAPP ANIMATIONS */
+@keyframes waPulseRing{
+  0%{box-shadow:0 0 0 0 rgba(15,118,110,.55),0 10px 25px rgba(11,13,14,.28)}
+  70%{box-shadow:0 0 0 14px rgba(15,118,110,0),0 10px 25px rgba(11,13,14,.28)}
+  100%{box-shadow:0 0 0 0 rgba(15,118,110,0),0 10px 25px rgba(11,13,14,.28)}
+}
+@keyframes waFloatBob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+@keyframes waIconWiggle{
+  0%,82%,100%{transform:rotate(0deg) scale(1)}
+  86%{transform:rotate(-10deg) scale(1.08)}
+  90%{transform:rotate(10deg) scale(1.08)}
+  94%{transform:rotate(-6deg) scale(1.04)}
+}
+
+.wa-anim{
+  animation:waFloatBob 2.8s ease-in-out infinite;
+  position:relative;overflow:hidden
+}
+.wa-anim:before{
+  content:"";position:absolute;top:0;left:-120%;width:70%;height:100%;
+  background:linear-gradient(110deg,transparent,rgba(255,255,255,.32),transparent);
+  animation:waShine 3.4s infinite
+}
+@keyframes waShine{
+  0%{left:-120%}
+  45%,100%{left:140%}
+}
+.wa-anim svg{animation:waIconWiggle 4s ease-in-out infinite}
+
+.header-cta{
+  background:var(--c1);color:#fff;padding:11px 17px;border-radius:9px;
+  font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:8px;
+  transition:.25s
+}
+.header-cta:hover{background:var(--bw-black);transform:translateY(-2px)}
 .menu-btn{display:none;border:0;background:none;font-size:25px;color:var(--bw-black)}
 
-/* HERO SECTION */
+/* HERO + AUTOMATIC 10-PHOTO FIREBASE SLIDESHOW */
 .hero{
-  min-height:650px;
-  background:radial-gradient(circle at 88% 12%,var(--c1-soft) 0%,transparent 42%),
-             radial-gradient(circle at 12% 90%,var(--c2-soft) 0%,transparent 38%),
+  min-height:660px;
+  background:radial-gradient(circle at 86% 15%,var(--c1-soft) 0%,transparent 44%),
+             radial-gradient(circle at 14% 88%,var(--c2-soft) 0%,transparent 40%),
              var(--bw-offwhite);
-  padding:58px 7% 72px;display:grid;grid-template-columns:1fr 1.12fr;gap:42px;align-items:center
+  padding:56px 7% 72px;display:grid;grid-template-columns:1fr 1.15fr;gap:42px;align-items:center
 }
 .kicker{font-size:10px;letter-spacing:3px;font-weight:800;color:var(--c1);text-transform:uppercase}
 .kicker:before{
@@ -90,11 +143,11 @@ button{cursor:pointer}
   background:var(--c2);vertical-align:middle;margin-right:9px
 }
 .hero h1{
-  font:800 clamp(42px,5.3vw,68px)/1.04 Manrope;letter-spacing:-3px;
+  font:800 clamp(42px,5.2vw,68px)/1.04 Manrope;letter-spacing:-3px;
   margin:20px 0;color:var(--bw-black)
 }
 .hero h1 em{font-style:normal;color:var(--c1)}
-.hero-copy>p{max-width:465px;color:#4f5558;line-height:1.85;font-size:14.5px}
+.hero-copy>p{max-width:465px;color:#4c5256;line-height:1.85;font-size:14.5px}
 .hero-buttons{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
 .btn{
   padding:15px 22px;border-radius:10px;display:inline-flex;align-items:center;
@@ -108,61 +161,70 @@ button{cursor:pointer}
 .btn-outline{background:#fff;border:1.5px solid #cfd5d8;color:var(--bw-black)}
 
 .hero-badges{display:flex;gap:18px;flex-wrap:wrap;margin-top:28px;padding-top:22px;border-top:1px solid #dfe3e5}
-.hero-badge{font-size:11px;font-weight:700;color:#2f3437;display:flex;align-items:center;gap:7px}
+.hero-badge{font-size:11px;font-weight:700;color:#2c3134;display:flex;align-items:center;gap:7px}
 .hero-badge span{
   width:20px;height:20px;border-radius:50%;background:var(--c1-soft);
   color:var(--c1);display:grid;place-items:center;font-size:11px;font-weight:900
 }
 
-/* 1ST PAGE SLIDER (RESERVED FOR YOUR FIREBASE PHOTOS) */
+/* SLIDER (10 FIREBASE SLOTS) */
 .slider-wrap{position:relative;min-width:0}
 .slider{
-  height:475px;border-radius:24px;overflow:hidden;position:relative;
-  background:#111416;border:1px solid #262c30;
+  height:480px;border-radius:24px;overflow:hidden;position:relative;
+  background:#0f1214;border:1px solid #262c30;
   box-shadow:0 28px 65px rgba(11,13,14,.22)
 }
+.slide-progress-track{
+  position:absolute;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,.14);z-index:10
+}
+.slide-progress-fill{
+  height:100%;width:0%;background:linear-gradient(90deg,var(--c1-light),var(--c2-light));
+  transition:width linear
+}
 .slide{
-  position:absolute;inset:0;opacity:0;transform:scale(1.02);
-  transition:opacity .65s ease,transform .9s ease;pointer-events:none
+  position:absolute;inset:0;opacity:0;transform:scale(1.04);
+  transition:opacity .75s ease,transform 1.2s ease;pointer-events:none
 }
 .slide.active{opacity:1;transform:scale(1);pointer-events:auto}
 .slide img{width:100%;height:100%;object-fit:cover;display:block}
-.empty-firebase-slot{
+.firebase-slot-box{
   height:100%;width:100%;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;padding:28px 28px 128px;text-align:center;
-  background:radial-gradient(circle at 50% 35%,rgba(15,118,110,.26),transparent 62%),
-             linear-gradient(155deg,#0c0e10 0%,#1a1f22 100%);
+  justify-content:center;padding:24px 28px 132px;text-align:center;
+  background:radial-gradient(circle at 50% 30%,rgba(15,118,110,.28),transparent 60%),
+             radial-gradient(circle at 80% 70%,rgba(217,119,6,.14),transparent 50%),
+             linear-gradient(155deg,#0b0d0e 0%,#191e21 100%);
   color:#fff
 }
-.slot-frame{
-  width:84px;height:84px;border-radius:22px;
-  border:1.5px dashed rgba(255,255,255,.35);
-  display:grid;place-items:center;margin-bottom:16px;color:var(--c2);font-size:28px;font-weight:800
+.slot-ring{
+  width:78px;height:78px;border-radius:22px;
+  border:1.5px dashed rgba(251,191,36,.6);background:rgba(255,255,255,.03);
+  display:grid;place-items:center;margin-bottom:14px;color:var(--c2-light);
+  font:800 18px Manrope;animation:pulseDot 2.2s infinite
 }
-.empty-firebase-slot strong{font:800 18px Manrope;letter-spacing:.4px}
-.empty-firebase-slot small{margin-top:7px;font-size:11.5px;color:#b4bcc0;max-width:340px;line-height:1.55}
+.firebase-slot-box strong{font:800 17px Manrope;letter-spacing:.5px}
+.firebase-slot-box small{margin-top:6px;font-size:11.5px;color:#b8c0c4;max-width:350px;line-height:1.55}
 
 .slide-caption{
-  position:absolute;bottom:0;left:0;right:0;padding:65px 26px 22px;
-  color:#fff;background:linear-gradient(to top,rgba(8,10,12,.96) 0%,rgba(8,10,12,.76) 58%,transparent 100%)
+  position:absolute;bottom:0;left:0;right:0;padding:68px 26px 22px;
+  color:#fff;background:linear-gradient(to top,rgba(8,10,12,.96) 0%,rgba(8,10,12,.78) 60%,transparent 100%)
 }
 .slide-tag{
-  display:inline-block;background:rgba(15,118,110,.35);border:1px solid rgba(217,119,6,.6);
+  display:inline-block;background:rgba(15,118,110,.36);border:1px solid rgba(251,191,36,.55);
   color:#fde68a;padding:4px 10px;border-radius:20px;font-size:9px;letter-spacing:1.8px;font-weight:800
 }
-.slide-caption h3{font:800 21px Manrope;margin:8px 0 5px;color:#fff}
-.slide-caption p{font-size:12.5px;color:#d6dadc;line-height:1.6;max-width:520px}
+.slide-caption h3{font:800 20px Manrope;margin:8px 0 5px;color:#fff}
+.slide-caption p{font-size:12px;color:#d6dadc;line-height:1.6;max-width:540px}
 
-.slider-controls{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:12px}
+.slider-controls{display:flex;align-items:center;justify-content:space-between;margin-top:15px;gap:10px}
 .slider-arrows{display:flex;gap:8px}
 .slider-arrows button{
-  width:40px;height:40px;border:1px solid #d4d8da;background:#fff;
+  width:38px;height:38px;border:1px solid #d4d8da;background:#fff;
   border-radius:50%;font-size:16px;color:var(--bw-black);transition:.2s
 }
 .slider-arrows button:hover{background:var(--bw-black);color:#fff;border-color:var(--bw-black)}
-.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:240px}
-.dots button{width:7px;height:7px;border:0;border-radius:20px;background:#c7cdd0;transition:.3s}
-.dots button.active{width:24px;background:var(--c1)}
+.dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:250px}
+.dots button{width:7px;height:7px;border:0;border-radius:20px;background:#c5cbce;transition:.3s}
+.dots button.active{width:22px;background:var(--c1)}
 .slide-count{font-size:11px;color:var(--bw-gray);font-weight:800;white-space:nowrap}
 
 /* STATS STRIP */
@@ -170,43 +232,54 @@ button{cursor:pointer}
   display:grid;grid-template-columns:repeat(4,1fr);padding:28px 7%;
   border-bottom:1px solid var(--bw-line);gap:16px;background:#fff
 }
-.stat{display:flex;gap:12px;align-items:center;justify-content:center}
+.stat{display:flex;gap:12px;align-items:center;justify-content:center;transition:transform .25s}
+.stat:hover{transform:translateY(-3px)}
 .stat b{font:800 24px Manrope;color:var(--c1)}
 .stat:nth-child(2n) b{color:var(--c2)}
 .stat span{font-size:11.5px;font-weight:700;color:#454a4d;line-height:1.35}
 
 /* COMMON SECTION */
-.section{padding:90px 7%}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin:14px 0 44px}
+.section{padding:88px 7%}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin:14px 0 42px}
 .section-head h2{font:800 clamp(30px,4vw,46px)/1.12 Manrope;letter-spacing:-1.8px}
 .section-head h2 em{color:var(--c1);font-style:normal}
-.section-head p{max-width:390px;font-size:13px;line-height:1.8;color:var(--bw-gray)}
+.section-head p{max-width:400px;font-size:13px;line-height:1.8;color:var(--bw-gray)}
 
 /* ABOUT US SECTION */
 .about{background:#fff}
-.about-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:50px;align-items:center}
-.about-visual{
-  border-radius:24px;padding:24px;background:var(--bw-offwhite);
-  border:1px solid var(--bw-line)
+.about-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+.about-photo-box{
+  height:360px;border-radius:22px;overflow:hidden;position:relative;
+  background:linear-gradient(145deg,#101416,#1b2326);border:1px solid var(--bw-line);
+  box-shadow:0 18px 40px rgba(11,13,14,.12)
 }
-.ai-art-frame{
-  border-radius:16px;overflow:hidden;border:1px solid #dfe3e5;
-  background:#fff;box-shadow:0 14px 32px rgba(11,13,14,.08)
+.about-photo-box img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-slot-placeholder{
+  height:100%;width:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:24px;text-align:center;color:#fff
 }
-.ai-art-frame svg{width:100%;height:auto;display:block}
+.photo-slot-placeholder .tag-pill{
+  background:rgba(15,118,110,.35);border:1px solid rgba(94,234,212,.5);
+  color:var(--c1-light);padding:4px 11px;border-radius:20px;font-size:9px;
+  font-weight:800;letter-spacing:1.6px;margin-bottom:12px
+}
+.photo-slot-placeholder strong{font:800 17px Manrope}
+.photo-slot-placeholder small{font-size:11.5px;color:#b8c0c4;margin-top:6px;max-width:290px;line-height:1.5}
+
 .about-card-float{
   background:var(--bw-black);color:#fff;padding:18px 22px;border-radius:16px;
   margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:15px;
   border-left:4px solid var(--c2)
 }
-.about-card-float strong{font:800 15px Manrope;color:#fbbf24;display:block}
+.about-card-float strong{font:800 15px Manrope;color:var(--c2-light);display:block}
 .about-card-float span{font-size:11.5px;color:#d8dcde}
 
 .about-copy h2{font:800 clamp(30px,3.8vw,44px)/1.12 Manrope;letter-spacing:-1.5px;margin:14px 0 18px}
 .about-copy h2 em{font-style:normal;color:var(--c1)}
-.about-copy p{font-size:13.5px;line-height:1.9;color:#4f5558;margin-bottom:16px}
+.about-copy p{font-size:13.5px;line-height:1.9;color:#4c5256;margin-bottom:16px}
 .about-points{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0 28px}
-.about-point{background:var(--bw-offwhite);padding:15px 16px;border-radius:12px;border:1px solid var(--bw-line)}
+.about-point{background:var(--bw-offwhite);padding:15px 16px;border-radius:12px;border:1px solid var(--bw-line);transition:.25s}
+.about-point:hover{border-color:var(--c1);transform:translateY(-2px)}
 .about-point b{display:block;font:800 13px Manrope;color:var(--bw-black);margin-bottom:4px}
 .about-point span{font-size:11.5px;color:var(--bw-gray);line-height:1.5}
 
@@ -215,13 +288,20 @@ button{cursor:pointer}
 .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .pkg-card{
   background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--bw-line);
-  display:flex;flex-direction:column;transition:.3s
+  display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease
 }
-.pkg-card:hover{transform:translateY(-7px);box-shadow:0 22px 45px rgba(11,13,14,.12)}
-.pkg-art{height:215px;position:relative;overflow:hidden;background:#111416}
-.pkg-art svg{width:100%;height:100%;display:block}
+.pkg-card:hover{
+  transform:translateY(-8px);box-shadow:0 24px 48px rgba(11,13,14,.13);
+  border-color:rgba(15,118,110,.45)
+}
+.pkg-photo{
+  height:210px;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#101416,#1b2124)
+}
+.pkg-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.pkg-card:hover .pkg-photo img{transform:scale(1.05)}
 .pkg-badge{
-  position:absolute;top:13px;left:13px;background:var(--bw-black);color:#fff;
+  position:absolute;top:12px;left:12px;z-index:2;background:var(--bw-black);color:#fff;
   border:1px solid rgba(255,255,255,.18);font-size:9px;font-weight:800;
   letter-spacing:1.4px;padding:5px 11px;border-radius:20px
 }
@@ -229,21 +309,25 @@ button{cursor:pointer}
 .pkg-badge.teal{background:var(--c1);color:#fff;border-color:var(--c1)}
 
 .pkg-body{padding:24px;display:flex;flex-direction:column;flex:1}
-.pkg-body h3{font:800 19px Manrope;color:var(--bw-black);margin-bottom:9px}
-.pkg-body>p{font-size:12.5px;line-height:1.75;color:#555b5e;margin-bottom:16px}
+.pkg-body h3{font:800 18.5px Manrope;color:var(--bw-black);margin-bottom:9px}
+.pkg-body>p{font-size:12.5px;line-height:1.78;color:#52585c;margin-bottom:16px}
 .pkg-list{list-style:none;margin-bottom:22px;flex:1}
-.pkg-list li{font-size:12px;color:#2f3437;margin:8px 0;display:flex;align-items:flex-start;gap:8px}
+.pkg-list li{font-size:12px;color:#2c3134;margin:8px 0;display:flex;align-items:flex-start;gap:8px}
 .pkg-list li:before{content:"✓";color:var(--c1);font-weight:900}
 .pkg-btn{
-  width:100%;padding:13px 16px;border-radius:10px;background:var(--bw-offwhite);color:var(--bw-black);
+  width:100%;padding:13px 16px;border-radius:10px;background:var(--c1);color:#fff;
   font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:.25s;border:1px solid #d6dadc
+  transition:.25s
 }
-.pkg-card:hover .pkg-btn{background:var(--bw-black);color:#fff;border-color:var(--bw-black)}
+.pkg-btn:hover{background:var(--bw-black)}
 
-/* PROCESS STEPS */
+/* HOW IT WORKS */
 .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.step-card{border:1px solid var(--bw-line);border-radius:18px;padding:26px 22px;background:#fff}
+.step-card{
+  border:1px solid var(--bw-line);border-radius:18px;padding:26px 22px;
+  background:#fff;transition:.25s
+}
+.step-card:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(11,13,14,.08)}
 .step-num{
   width:38px;height:38px;border-radius:11px;background:var(--bw-black);color:#fff;
   font:800 14px Manrope;display:grid;place-items:center;margin-bottom:18px
@@ -259,12 +343,14 @@ button{cursor:pointer}
   border-top:3px solid var(--c1)
 }
 .area h2{font:800 36px Manrope;letter-spacing:-1px;margin-top:12px}
-.area .kicker{color:#5eead4}
+.area .kicker{color:var(--c1-light)}
 .area-list{display:flex;gap:12px;flex-wrap:wrap}
 .area-list span{
   border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);
-  border-radius:10px;padding:14px 20px;font-size:12px;font-weight:700;color:#f1f3f4
+  border-radius:10px;padding:14px 20px;font-size:12px;font-weight:700;color:#f1f3f4;
+  transition:.25s
 }
+.area-list span:hover{border-color:var(--c2-light);transform:translateY(-2px)}
 
 /* FAQ */
 .faq{max-width:1050px;margin:auto}
@@ -279,13 +365,13 @@ details p{font-size:13px;line-height:1.8;color:var(--bw-gray);margin-top:12px;ma
 /* CONTACT CTA */
 .contact{padding:20px 7% 85px}
 .contact-box{
-  background:linear-gradient(135deg,#f3f5f5 0%,#e6f4f2 65%,#fef3e2 100%);
+  background:linear-gradient(135deg,#f3f5f5 0%,#e6f4f2 62%,#fef3e2 100%);
   border:1px solid #dce2e4;border-radius:24px;padding:52px 7%;
   display:flex;justify-content:space-between;align-items:center;gap:28px
 }
 .contact-box h2{font:800 clamp(30px,3.8vw,42px)/1.12 Manrope;letter-spacing:-1.5px;margin:14px 0}
-.contact-box p{font-size:13px;color:#4f5558;max-width:480px;line-height:1.7}
-.contact-actions{display:flex;flex-direction:column;gap:12px;min-width:240px}
+.contact-box p{font-size:13px;color:#4c5256;max-width:480px;line-height:1.7}
+.contact-actions{display:flex;flex-direction:column;gap:12px;min-width:245px}
 .contact-phone{background:#fff;border-radius:11px;padding:15px 18px;display:flex;gap:13px;align-items:center;color:var(--bw-black);border:1px solid #dce1e3}
 .contact-phone small{font-size:9px;letter-spacing:2px;font-weight:800;display:block;color:var(--c1)}
 .contact-phone b{font-size:18px;margin-top:2px;display:block}
@@ -301,25 +387,28 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
 }
 .copyright{width:100%;padding-top:18px;border-top:1px solid var(--bw-line);font-size:11px;color:#7a8084;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
-/* FLOATING BUTTONS */
+/* FLOATING WHATSAPP & CALL BUTTONS */
 .float{
-  position:fixed;right:19px;width:54px;height:54px;border-radius:50%;
-  color:#fff;display:grid;place-items:center;z-index:85;
-  box-shadow:0 10px 25px rgba(11,13,14,.28);transition:.25s
+  position:fixed;right:19px;width:56px;height:56px;border-radius:50%;
+  color:#fff;display:grid;place-items:center;z-index:85;transition:.25s
 }
-.float:hover{transform:scale(1.08)}
-.float-wa{bottom:86px;background:var(--c1)}
-.float-call{bottom:20px;background:var(--bw-black);font-size:21px}
+.float:hover{transform:scale(1.1)}
+.float-wa{
+  bottom:88px;background:var(--c1);
+  animation:waPulseRing 2s infinite,waFloatBob 2.8s ease-in-out infinite
+}
+.float-wa svg{animation:waIconWiggle 3.8s ease-in-out infinite}
+.float-call{bottom:20px;background:var(--bw-black);font-size:21px;box-shadow:0 10px 25px rgba(11,13,14,.28)}
 
-/* ADMIN PANEL MODAL */
+/* ADMIN MODAL */
 .admin-overlay{
-  position:fixed;inset:0;background:rgba(9,11,13,.75);backdrop-filter:blur(6px);
+  position:fixed;inset:0;background:rgba(9,11,13,.76);backdrop-filter:blur(6px);
   z-index:120;display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto
 }
 .admin-overlay.open{display:flex}
 .admin-modal{
-  background:#fff;width:100%;max-width:780px;border-radius:22px;padding:28px;
-  max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.4)
+  background:#fff;width:100%;max-width:800px;border-radius:22px;padding:28px;
+  max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.42)
 }
 .admin-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--bw-line);margin-bottom:20px}
 .admin-head h3{font:800 21px Manrope}
@@ -328,29 +417,35 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
   padding:12px 15px;border-radius:11px;font-size:12px;margin-bottom:18px;line-height:1.6;
   background:var(--c1-soft);border:1px solid #b8ded9;color:#0b4d47
 }
+.admin-tabs{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.admin-tab{
+  padding:9px 16px;border-radius:9px;border:1px solid #cfd5d8;background:#fff;
+  font-size:12px;font-weight:800;color:var(--bw-black)
+}
+.admin-tab.active{background:var(--bw-black);color:#fff;border-color:var(--bw-black)}
 .admin-form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
 .admin-form .full{grid-column:1/-1}
 .admin-form label{display:block;font-size:11px;font-weight:800;margin-bottom:6px;color:#2e3336}
-.admin-form input,.admin-form textarea{
-  width:100%;padding:11px 13px;border:1px solid #cfd5d8;border-radius:9px;font-size:13px
+.admin-form input,.admin-form textarea,.admin-form select{
+  width:100%;padding:11px 13px;border:1px solid #cfd5d8;border-radius:9px;font-size:13px;background:#fff
 }
 .admin-form textarea{min-height:74px;resize:vertical}
-.admin-slides-list{display:flex;flex-direction:column;gap:12px}
-.admin-slide-item{
-  display:flex;align-items:center;justify-content:space-between;gap:14px;
-  padding:12px;border:1px solid var(--bw-line);border-radius:12px;background:var(--bw-offwhite)
+.admin-list{display:flex;flex-direction:column;gap:10px}
+.admin-item{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 13px;border:1px solid var(--bw-line);border-radius:12px;background:var(--bw-offwhite)
 }
-.admin-slide-thumb{width:68px;height:52px;border-radius:8px;object-fit:cover;background:#14181a;color:#fff;flex-shrink:0;display:grid;place-items:center;font-size:10px;font-weight:800}
-.admin-slide-meta{flex:1;min-width:0}
-.admin-slide-meta b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.admin-slide-meta small{display:block;font-size:11px;color:var(--bw-gray);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-thumb{width:64px;height:48px;border-radius:8px;object-fit:cover;background:#14181a;color:#fff;flex-shrink:0;display:grid;place-items:center;font-size:10px;font-weight:800}
+.admin-meta{flex:1;min-width:0}
+.admin-meta b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-meta small{display:block;font-size:11px;color:var(--bw-gray);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .del-btn{background:#fee9e9;color:#b42323;border:1px solid #f7caca;padding:7px 12px;border-radius:8px;font-size:11px;font-weight:800}
 
 @media(max-width:920px){
   .hero,.about-grid{grid-template-columns:1fr}
   .package-grid{grid-template-columns:1fr 1fr}
   .steps-grid{grid-template-columns:1fr 1fr}
-  .slider{height:400px}
+  .slider{height:410px}
 }
 @media(max-width:650px){
   .announcement{font-size:8.5px;letter-spacing:1px;padding:9px 4%}
@@ -363,7 +458,7 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
   .nav.open{display:flex}
   .header-cta{font-size:10px;padding:10px 12px}
   .hero{padding:42px 20px 55px}
-  .slider{height:350px;border-radius:18px}
+  .slider{height:360px;border-radius:18px}
   .stats{grid-template-columns:1fr 1fr;padding:24px 18px}
   .section{padding:65px 20px}
   .section-head{display:block}
@@ -377,23 +472,25 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
 
 <body>
 
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <!-- TOP ANNOUNCEMENT -->
 <div class="announcement">
   <span><i class="announce-dot"></i>SMART SPACE-SAVING DRYING SYSTEMS</span>
   <span>PUNE <i>•</i> PCMC <i>•</i> MUMBAI</span>
 </div>
 
-<!-- STICKY HEADER WITH AI PROFILE LOGO -->
+<!-- STICKY HEADER WITH PROFILE LOGO -->
 <header class="header">
   <a href="#home" class="logo">
     <span class="logo-badge" aria-hidden="true">
       <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
-        <rect x="5" y="6" width="26" height="3.2" rx="1.6" fill="#f59e0b"/>
+        <rect x="5" y="6" width="26" height="3.2" rx="1.6" fill="#fbbf24"/>
         <line x1="11" y1="9.2" x2="11" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
         <line x1="25" y1="9.2" x2="25" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
         <rect x="6" y="15.5" width="24" height="2.7" rx="1.35" fill="#ffffff"/>
         <rect x="6" y="20.5" width="24" height="2.7" rx="1.35" fill="#5eead4"/>
-        <rect x="6" y="25.5" width="24" height="2.7" rx="1.35" fill="#f59e0b"/>
+        <rect x="6" y="25.5" width="24" height="2.7" rx="1.35" fill="#fbbf24"/>
       </svg>
     </span>
     <span class="logo-words">
@@ -407,25 +504,28 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
   <nav class="nav" id="nav">
     <a href="#home">Home</a>
     <a href="#about">About Us</a>
-    <a href="#services">Services &amp; Packages</a>
-    <a href="#process">How It Works</a>
+    <a href="#services">Packages &amp; Services</a>
+    <a href="#process">Process</a>
     <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <a class="header-cta" href="https://wa.me/919179622121?text=Hello%20Cloth%20Dry%20System%20Pune%2C%20I%20want%20details%20about%20your%20cloth%20drying%20systems." target="_blank" rel="noopener">
+  <a class="header-cta wa-anim" href="https://wa.me/919179622121?text=Hello%20Cloth%20Dry%20System%20Pune%2C%20I%20want%20details%20about%20your%20cloth%20drying%20systems." target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 32 32" fill="white">
+      <path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm7.5 18.3c-.3.9-1.8 1.7-2.5 1.8-.7.1-1.5.2-2.4-.1-.6-.2-1.3-.4-2.2-.8-3.8-1.6-6.3-5.5-6.5-5.8-.2-.3-1.5-2-1.5-3.9s1-2.8 1.3-3.1c.3-.4.8-.5 1-.5h.8c.2 0 .6-.1.9.7.3.8 1.1 2.7 1.2 2.9.1.2.2.4 0 .7-.1.3-.2.4-.4.7-.2.2-.4.5-.6.7-.2.2-.4.4-.2.8.2.4 1 1.6 2.1 2.6 1.5 1.3 2.7 1.7 3.1 1.9.4.2.6.2.8-.1.2-.3 1-1.1 1.2-1.5.3-.4.5-.3.9-.2.4.1 2.3 1.1 2.7 1.3.4.2.7.3.8.5.1.1.1.9-.2 1.8z"/>
+    </svg>
     WHATSAPP ↗
   </a>
 </header>
 
 <main>
 
-<!-- HERO SECTION + RESERVED FIREBASE PHOTO SLIDESHOW -->
+<!-- HERO + AUTOMATIC 10-PHOTO FIREBASE SLIDESHOW -->
 <section class="hero" id="home">
   <div class="hero-copy">
     <div class="kicker">MODERN BALCONY &amp; CEILING DRYING</div>
     <h1>Dry clothes<br>smartly, keep<br>space <em>open.</em></h1>
-    <p>Upgrade your balcony or utility zone with smooth pulley ceiling systems, foldable wall racks, and rust-proof drying setups installed right at your home.</p>
+    <p>Upgrade your balcony or utility area with smooth ceiling pulley systems, foldable wall racks, and durable drying solutions installed at your home.</p>
 
     <div class="hero-buttons">
       <a href="#services" class="btn btn-dark">EXPLORE PACKAGES ↗</a>
@@ -439,12 +539,16 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
     </div>
   </div>
 
-  <!-- 1ST PAGE SLIDER: LEFT BLANK/RESERVED FOR YOUR FIREBASE PHOTOS -->
-  <div class="slider-wrap">
-    <div class="slider" id="heroSlider"></div>
+  <!-- 1ST PAGE AUTOMATIC SLIDESHOW (10 FIREBASE SLOTS) -->
+  <div class="slider-wrap" id="sliderWrap">
+    <div class="slider" id="heroSlider">
+      <div class="slide-progress-track">
+        <div class="slide-progress-fill" id="slideProgress"></div>
+      </div>
+    </div>
 
     <div class="slider-controls">
-      <span class="slide-count" id="slideCount">01 / 03</span>
+      <span class="slide-count" id="slideCount">01 / 10</span>
       <div class="dots" id="sliderDots"></div>
       <div class="slider-arrows">
         <button id="prevSlide" aria-label="Previous slide">←</button>
@@ -454,7 +558,7 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
   </div>
 </section>
 
-<!-- HIGHLIGHTS STRIP -->
+<!-- STATS STRIP -->
 <div class="stats reveal">
   <div class="stat"><b>100%</b><span>Open Balcony Floor Space</span></div>
   <div class="stat"><b>304</b><span>Grade Rust-Free Rods</span></div>
@@ -462,303 +566,54 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
   <div class="stat"><b>3 Hubs</b><span>Pune • PCMC • Mumbai</span></div>
 </div>
 
-<!-- ABOUT US SECTION WITH DETAILED AI SCENE ARTWORK -->
+<!-- ABOUT US SECTION WITH FIREBASE PHOTO SLOT -->
 <section class="section about" id="about">
   <div class="about-grid">
     <div class="about-visual reveal">
-      <div class="ai-art-frame">
-        <!-- Detailed AI Scene: Sunlit Apartment Balcony with Ceiling Pulley Drying System -->
-        <svg viewBox="0 0 520 310" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="skyGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#0f766e" stop-opacity="0.18"/>
-              <stop offset="55%" stop-color="#ffffff"/>
-              <stop offset="100%" stop-color="#fef3c7" stop-opacity="0.65"/>
-            </linearGradient>
-            <linearGradient id="sunGlow" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          <rect width="520" height="310" fill="url(#skyGrad)"/>
-          <circle cx="435" cy="68" r="95" fill="url(#sunGlow)"/>
-          <circle cx="435" cy="68" r="24" fill="#d97706"/>
-
-          <!-- Glass sliding door & wall -->
-          <rect x="28" y="24" width="165" height="225" rx="8" fill="#181b1d"/>
-          <rect x="38" y="34" width="68" height="205" rx="4" fill="#e6f4f2" opacity="0.85"/>
-          <rect x="115" y="34" width="68" height="205" rx="4" fill="#e6f4f2" opacity="0.65"/>
-
-          <!-- Ceiling & Pulley Rig -->
-          <rect x="18" y="14" width="484" height="14" rx="5" fill="#0b0d0e"/>
-          <rect x="135" y="28" width="24" height="10" rx="3" fill="#0f766e"/>
-          <rect x="385" y="28" width="24" height="10" rx="3" fill="#0f766e"/>
-          <circle cx="147" cy="40" r="6" fill="#d97706"/>
-          <circle cx="397" cy="40" r="6" fill="#d97706"/>
-
-          <!-- Pulley Cords -->
-          <line x1="147" y1="40" x2="147" y2="112" stroke="#181b1d" stroke-width="1.8" stroke-dasharray="3 2"/>
-          <line x1="397" y1="40" x2="397" y2="112" stroke="#181b1d" stroke-width="1.8" stroke-dasharray="3 2"/>
-          <line x1="397" y1="40" x2="468" y2="40" stroke="#181b1d" stroke-width="1.8"/>
-          <line x1="468" y1="40" x2="468" y2="188" stroke="#d97706" stroke-width="2.2"/>
-          <rect x="461" y="176" width="14" height="24" rx="3" fill="#0b0d0e"/>
-
-          <!-- Overhead Rods -->
-          <rect x="120" y="96" width="305" height="6" rx="3" fill="#0b0d0e"/>
-          <rect x="120" y="114" width="305" height="6" rx="3" fill="#0f766e"/>
-          <rect x="120" y="132" width="305" height="6" rx="3" fill="#d97706"/>
-
-          <!-- AI Stylized Laundry Items -->
-          <!-- Shirt -->
-          <path d="M158 102 L198 102 L207 124 L194 129 L190 118 L190 172 L166 172 L166 118 L162 129 L149 124 Z" fill="#0f766e" opacity="0.9"/>
-          <!-- Bath Towel -->
-          <rect x="234" y="120" width="58" height="76" rx="6" fill="#ffffff" stroke="#0b0d0e" stroke-width="2"/>
-          <line x1="242" y1="184" x2="284" y2="184" stroke="#d97706" stroke-width="3"/>
-          <!-- Trousers -->
-          <path d="M325 138 L374 138 L368 206 L353 206 L349 168 L345 206 L330 206 Z" fill="#181b1d"/>
-
-          <!-- Balcony Railing & Potted Plant -->
-          <rect x="18" y="246" width="484" height="10" rx="4" fill="#0b0d0e"/>
-          <line x1="230" y1="220" x2="230" y2="246" stroke="#181b1d" stroke-width="3"/>
-          <line x1="310" y1="220" x2="310" y2="246" stroke="#181b1d" stroke-width="3"/>
-          <line x1="390" y1="220" x2="390" y2="246" stroke="#181b1d" stroke-width="3"/>
-          <rect x="215" y="214" width="210" height="7" rx="3" fill="#0f766e"/>
-
-          <!-- Floor Bar -->
-          <rect x="18" y="266" width="484" height="30" rx="8" fill="#0b0d0e"/>
-          <text x="260" y="285" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11.5" font-weight="800" fill="#ffffff">
-            CLEAR WALKWAY • FAST AIRFLOW • ZERO FLOOR CLUTTER
-          </text>
-        </svg>
-      </div>
+      <div class="about-photo-box" id="aboutPhotoSlot"></div>
 
       <div class="about-card-float">
         <div>
           <strong>Cloth Dry System Pune</strong>
           <span>Tailored fitting for apartments, balconies &amp; utility areas</span>
         </div>
-        <span style="font-size:24px">✦</span>
+        <span style="font-size:24px;color:var(--c2-light)">✦</span>
       </div>
     </div>
 
     <div class="about-copy reveal">
       <div class="kicker">ABOUT US</div>
       <h2>Smart laundry spaces for <em>modern</em> homes.</h2>
-      <p>Floor-standing cloth racks eat up valuable balcony room, tilt easily, and clutter your home. <strong>Cloth Dry System Pune</strong> brings clean overhead pulley systems, foldable wall racks, and durable drying solutions designed for everyday Indian households.</p>
-      <p>Whether you have a compact apartment balcony or a spacious terrace utility area in Pune, Pimpri-Chinchwad, or Mumbai, we measure accurately and install cleanly.</p>
+      <p>Floor-standing drying racks crowd your balcony walkway, tilt easily, and take up precious living space. At <strong>Cloth Dry System Pune</strong>, we provide smart ceiling pulley systems, foldable wall racks, and dependable drying setups for everyday homes.</p>
+      <p>From site measurement to sturdy mounting and servicing across Pune, Pimpri-Chinchwad, and Mumbai, our focus is clean workmanship and effortless daily use.</p>
 
       <div class="about-points">
         <div class="about-point">
-          <b>Smooth Rod Lifting</b>
-          <span>Lower each rod to waist height, hang clothes easily, and lift up.</span>
+          <b>Individual Rod Lifting</b>
+          <span>Lower only the rod you need, hang clothes comfortably, and lift up.</span>
         </div>
         <div class="about-point">
-          <b>Built to Last</b>
-          <span>Weather-resistant materials made for daily sun, wind &amp; monsoon.</span>
+          <b>Built for Daily Use</b>
+          <span>Designed for regular sun exposure, breezy balconies, and monsoon days.</span>
         </div>
       </div>
 
-      <a href="https://wa.me/919179622121?text=Hello%20Cloth%20Dry%20System%20Pune%2C%20I%20want%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener" class="btn btn-dark">
-        TALK TO OUR TEAM ↗
+      <a href="https://wa.me/919179622121?text=Hello%20Cloth%20Dry%20System%20Pune%2C%20I%20want%20to%20book%20a%20site%20visit." target="_blank" rel="noopener" class="btn btn-dark wa-anim">
+        BOOK FREE SITE VISIT ON WHATSAPP ↗
       </a>
     </div>
   </div>
 </section>
 
-<!-- SERVICES & PACKAGES WITH AI ILLUSTRATIONS (NO PRICE) -->
+<!-- PACKAGES & SERVICES SECTION (DESCRIPTIONS + FIREBASE PHOTO SLOTS, NO PRICE) -->
 <section class="section packages" id="services">
   <div class="kicker">PACKAGES &amp; SERVICES</div>
   <div class="section-head">
-    <h2>Designed for every<br><em>home &amp; balcony.</em></h2>
-    <p>Explore our product packages and doorstep services. Tap any card to get size &amp; model guidance on WhatsApp.</p>
+    <h2>Complete drying<br><em>packages &amp; services.</em></h2>
+    <p>Clear descriptions for every drying need and service. Add your Firebase photos anytime via Admin Panel.</p>
   </div>
 
-  <div class="package-grid">
-
-    <!-- 1. CEILING PULLEY PACKAGE -->
-    <article class="pkg-card reveal">
-      <div class="pkg-art">
-        <span class="pkg-badge teal">FLAGSHIP PACKAGE</span>
-        <svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="215" fill="#121618"/>
-          <circle cx="245" cy="52" r="78" fill="#0f766e" opacity="0.28"/>
-          <rect x="28" y="18" width="264" height="9" rx="4.5" fill="#ffffff"/>
-          <line x1="72" y1="27" x2="72" y2="68" stroke="#5eead4" stroke-width="2" stroke-dasharray="3 3"/>
-          <line x1="248" y1="27" x2="248" y2="68" stroke="#5eead4" stroke-width="2" stroke-dasharray="3 3"/>
-          <rect x="48" y="64" width="224" height="6" rx="3" fill="#ffffff"/>
-          <rect x="48" y="86" width="224" height="6" rx="3" fill="#5eead4"/>
-          <rect x="48" y="108" width="224" height="6" rx="3" fill="#f59e0b"/>
-          <rect x="48" y="130" width="224" height="6" rx="3" fill="#ffffff"/>
-          <rect x="75" y="114" width="34" height="58" rx="4" fill="#0f766e" opacity="0.85"/>
-          <rect x="135" y="136" width="44" height="52" rx="4" fill="#f59e0b" opacity="0.85"/>
-          <line x1="248" y1="27" x2="286" y2="27" stroke="#f59e0b" stroke-width="2"/>
-          <line x1="286" y1="27" x2="286" y2="165" stroke="#f59e0b" stroke-width="2.2"/>
-        </svg>
-      </div>
-      <div class="pkg-body">
-        <h3>Ceiling Pulley Drying System</h3>
-        <p>Smooth multi-rod overhead system that lets you raise and lower individual rods effortlessly using pulley cords.</p>
-        <ul class="pkg-list">
-          <li>4-Rod, 5-Rod &amp; 6-Rod configurations</li>
-          <li>Custom rod lengths tailored to your ceiling</li>
-          <li>Wall-mounted cord cleat for neat locking</li>
-        </ul>
-        <a class="pkg-btn" href="https://wa.me/919179622121?text=Hello%2C%20please%20share%20details%20for%20the%20Ceiling%20Pulley%20Drying%20System." target="_blank" rel="noopener">
-          GET PACKAGE DETAILS ↗
-        </a>
-      </div>
-    </article>
-
-    <!-- 2. WALL-MOUNTED ACCORDION STAND -->
-    <article class="pkg-card reveal">
-      <div class="pkg-art">
-        <span class="pkg-badge gold">SPACE SAVER</span>
-        <svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="215" fill="#15181a"/>
-          <circle cx="75" cy="110" r="85" fill="#d97706" opacity="0.22"/>
-          <rect x="34" y="24" width="16" height="166" rx="5" fill="#ffffff"/>
-          <path d="M50 48 L122 76 L194 48 L268 76" fill="none" stroke="#5eead4" stroke-width="4.5" stroke-linecap="round"/>
-          <path d="M50 104 L122 76 L194 104 L268 76" fill="none" stroke="#f59e0b" stroke-width="4.5" stroke-linecap="round"/>
-          <circle cx="122" cy="76" r="5" fill="#ffffff"/>
-          <circle cx="194" cy="76" r="5" fill="#ffffff"/>
-          <rect x="52" y="138" width="215" height="6" rx="3" fill="#ffffff"/>
-          <rect x="52" y="156" width="215" height="6" rx="3" fill="#5eead4"/>
-        </svg>
-      </div>
-      <div class="pkg-body">
-        <h3>Wall-Mounted Foldable Stand</h3>
-        <p>Expandable accordion wall rack that extends outward for drying and folds flat when not in use.</p>
-        <ul class="pkg-list">
-          <li>Ideal for utility walls, corridors &amp; small spaces</li>
-          <li>Sturdy pivot joints with smooth extension</li>
-          <li>Clean wall bracket fitting</li>
-        </ul>
-        <a class="pkg-btn" href="https://wa.me/919179622121?text=Hello%2C%20please%20share%20details%20for%20the%20Wall-Mounted%20Foldable%20Stand." target="_blank" rel="noopener">
-          GET PACKAGE DETAILS ↗
-        </a>
-      </div>
-    </article>
-
-    <!-- 3. HEAVY-DUTY STAINLESS STEEL PACKAGE -->
-    <article class="pkg-card reveal">
-      <div class="pkg-art">
-        <span class="pkg-badge">HEAVY LOAD</span>
-        <svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="215" fill="#101315"/>
-          <circle cx="160" cy="108" r="85" fill="#0f766e" opacity="0.24"/>
-          <rect x="42" y="34" width="236" height="146" rx="16" fill="none" stroke="#ffffff" stroke-width="4.5"/>
-          <line x1="42" y1="72" x2="278" y2="72" stroke="#5eead4" stroke-width="3.5"/>
-          <line x1="42" y1="108" x2="278" y2="108" stroke="#f59e0b" stroke-width="3.5"/>
-          <line x1="42" y1="144" x2="278" y2="144" stroke="#5eead4" stroke-width="3.5"/>
-          <rect x="72" y="24" width="38" height="16" rx="5" fill="#f59e0b"/>
-          <rect x="210" y="24" width="38" height="16" rx="5" fill="#f59e0b"/>
-        </svg>
-      </div>
-      <div class="pkg-body">
-        <h3>Stainless Steel Heavy-Duty Pack</h3>
-        <p>Built for heavy family laundry including bedsheets, blankets, and thick towels without rod bending.</p>
-        <ul class="pkg-list">
-          <li>High-strength corrosion-resistant stainless steel</li>
-          <li>Reinforced ceiling anchors &amp; heavy pulleys</li>
-          <li>Designed for long-term daily reliability</li>
-        </ul>
-        <a class="pkg-btn" href="https://wa.me/919179622121?text=Hello%2C%20please%20share%20details%20for%20the%20Stainless%20Steel%20Heavy-Duty%20Pack." target="_blank" rel="noopener">
-          GET PACKAGE DETAILS ↗
-        </a>
-      </div>
-    </article>
-
-    <!-- 4. BALCONY RAILING & COMPACT RACK -->
-    <article class="pkg-card reveal">
-      <div class="pkg-art">
-        <span class="pkg-badge teal">SUNLIGHT DRYING</span>
-        <svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="215" fill="#131719"/>
-          <circle cx="250" cy="48" r="22" fill="#d97706" opacity="0.85"/>
-          <rect x="36" y="88" width="16" height="102" rx="4" fill="#ffffff"/>
-          <path d="M32 88 Q44 64 62 88" fill="none" stroke="#f59e0b" stroke-width="4.5"/>
-          <rect x="52" y="84" width="228" height="8" rx="4" fill="#5eead4"/>
-          <line x1="88" y1="92" x2="88" y2="148" stroke="#ffffff" stroke-width="2.5"/>
-          <line x1="140" y1="92" x2="140" y2="148" stroke="#ffffff" stroke-width="2.5"/>
-          <line x1="192" y1="92" x2="192" y2="148" stroke="#ffffff" stroke-width="2.5"/>
-          <line x1="244" y1="92" x2="244" y2="148" stroke="#ffffff" stroke-width="2.5"/>
-          <rect x="60" y="145" width="212" height="6" rx="3" fill="#f59e0b"/>
-        </svg>
-      </div>
-      <div class="pkg-body">
-        <h3>Balcony Railing Drying Rack</h3>
-        <p>Smart railing-mounted drying rack that catches natural breeze and sunlight for quick drying.</p>
-        <ul class="pkg-list">
-          <li>Suits apartment balcony grills &amp; railings</li>
-          <li>Foldable design for easy handling</li>
-          <li>Great for daily wear, towels &amp; kids' clothes</li>
-        </ul>
-        <a class="pkg-btn" href="https://wa.me/919179622121?text=Hello%2C%20please%20share%20details%20for%20the%20Balcony%20Railing%20Drying%20Rack." target="_blank" rel="noopener">
-          GET PACKAGE DETAILS ↗
-        </a>
-      </div>
-    </article>
-
-    <!-- 5. FREE SITE VISIT & MEASUREMENT -->
-    <article class="pkg-card reveal">
-      <div class="pkg-art">
-        <span class="pkg-badge gold">SITE CONSULTATION</span>
-        <svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="215" fill="#111517"/>
-          <rect x="44" y="42" width="232" height="130" rx="18" fill="#1c2226" stroke="#5eead4" stroke-width="2"/>
-          <rect x="64" y="66" width="192" height="28" rx="6" fill="#d97706"/>
-          <line x1="84" y1="66" x2="84" y2="80" stroke="#111517" stroke-width="2"/>
-          <line x1="112" y1="66" x2="112" y2="86" stroke="#111517" stroke-width="2"/>
-          <line x1="140" y1="66" x2="140" y2="80" stroke="#111517" stroke-width="2"/>
-          <line x1="168" y1="66" x2="168" y2="86" stroke="#111517" stroke-width="2"/>
-          <line x1="196" y1="66" x2="196" y2="80" stroke="#111517" stroke-width="2"/>
-          <line x1="224" y1="66" x2="224" y2="86" stroke="#111517" stroke-width="2"/>
-          <text x="160" y="132" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" font-weight="800" fill="#ffffff">
-            CUSTOM SPACE FIT
-          </text>
-        </svg>
-      </div>
-      <div class="pkg-body">
-        <h3>Home Measurement &amp; Guidance</h3>
-        <p>Unsure which length or rod count fits best? Get practical space measurement and model guidance at home.</p>
-        <ul class="pkg-list">
-          <li>Accurate balcony &amp; ceiling measurements</li>
-          <li>False ceiling / POP clearance check</li>
-          <li>Clear recommendation for your layout</li>
-        </ul>
-        <a class="pkg-btn" href="https://wa.me/919179622121?text=Hello%2C%20I%20want%20to%20book%20a%20Home%20Measurement%20and%20Guidance%20visit." target="_blank" rel="noopener">
-          BOOK SITE VISIT ↗
-        </a>
-      </div>
-    </article>
-
-    <!-- 6. ROPE REPLACEMENT & SERVICING -->
-    <article class="pkg-card reveal">
-      <div class="pkg-art">
-        <span class="pkg-badge">REPAIR &amp; CARE</span>
-        <svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="215" fill="#121618"/>
-          <circle cx="160" cy="108" r="62" fill="#0f766e" opacity="0.25" stroke="#5eead4" stroke-width="2.5"/>
-          <path d="M135 108 L152 125 L188 88" fill="none" stroke="#f59e0b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="85" cy="58" r="9" fill="#ffffff"/>
-          <circle cx="235" cy="158" r="9" fill="#5eead4"/>
-        </svg>
-      </div>
-      <div class="pkg-body">
-        <h3>Rope Replacement &amp; Servicing</h3>
-        <p>Restore worn ropes, stiff pulleys, or misaligned rods on your existing cloth drying stand.</p>
-        <ul class="pkg-list">
-          <li>Fresh braided cords &amp; smooth pulley wheels</li>
-          <li>Bracket &amp; rod leveling check</li>
-          <li>Doorstep service across Pune &amp; PCMC</li>
-        </ul>
-        <a class="pkg-btn" href="https://wa.me/919179622121?text=Hello%2C%20I%20need%20rope%20replacement%20or%20servicing%20for%20my%20cloth%20drying%20stand." target="_blank" rel="noopener">
-          BOOK SERVICING ↗
-        </a>
-      </div>
-    </article>
-
-  </div>
+  <div class="package-grid" id="packagesGrid"></div>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -766,38 +621,38 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
   <div class="kicker">HOW IT WORKS</div>
   <div class="section-head">
     <h2>Simple steps to a<br><em>neater home.</em></h2>
-    <p>Smooth coordination from your first message to final installation.</p>
+    <p>Smooth coordination from your enquiry to clean installation.</p>
   </div>
 
   <div class="steps-grid">
     <div class="step-card reveal">
       <div class="step-num">01</div>
-      <h3>Connect on WhatsApp / Call</h3>
-      <p>Share your requirement or balcony photo to get quick guidance.</p>
+      <h3>WhatsApp or Call</h3>
+      <p>Message us on WhatsApp or call directly to share your space details.</p>
     </div>
     <div class="step-card reveal">
       <div class="step-num">02</div>
-      <h3>Measure &amp; Plan</h3>
-      <p>We check space dimensions, ceiling type, and best rod placement.</p>
+      <h3>Site Measurement</h3>
+      <p>We check balcony/ceiling dimensions and suggest the right setup.</p>
     </div>
     <div class="step-card reveal">
       <div class="step-num">03</div>
-      <h3>Clean Installation</h3>
-      <p>Neat mounting with sturdy fixtures and minimal disruption.</p>
+      <h3>Clean Fitting</h3>
+      <p>Neat installation with strong anchors and smooth cord alignment.</p>
     </div>
     <div class="step-card reveal">
       <div class="step-num">04</div>
-      <h3>Ready to Use</h3>
-      <p>Test smooth lifting and start drying clothes effortlessly.</p>
+      <h3>Easy Daily Use</h3>
+      <p>Raise and lower rods smoothly and keep your floor space clear.</p>
     </div>
   </div>
 </section>
 
-<!-- LOCATIONS -->
+<!-- SERVICE LOCATIONS -->
 <section class="area reveal">
   <div>
-    <div class="kicker">SERVICE AREAS</div>
-    <h2>Available across key<br>urban locations.</h2>
+    <div class="kicker">SERVICE LOCATIONS</div>
+    <h2>Doorstep support across<br>key city areas.</h2>
   </div>
   <div class="area-list">
     <span>📍 Pune</span>
@@ -812,25 +667,25 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
 <section class="section faq" id="faq">
   <div class="kicker">FREQUENT QUESTIONS</div>
   <div class="section-head">
-    <h2>Helpful answers<br><em>before you book.</em></h2>
+    <h2>Helpful answers<br><em>before you enquire.</em></h2>
   </div>
 
   <div class="faq-list">
     <details>
-      <summary>Can ceiling pulley systems be fixed below POP or false ceilings?</summary>
+      <summary>Can ceiling pulley systems be installed below POP or false ceilings?</summary>
       <p>Yes. Proper extension anchors are used so the mount holds firmly into the main slab above the POP or false ceiling.</p>
     </details>
     <details>
-      <summary>Can I get custom sizes for small or wide balconies?</summary>
-      <p>Yes, different rod lengths and rod counts are available depending on your space measurement.</p>
+      <summary>Are different sizes and rod counts available?</summary>
+      <p>Yes. Different rod lengths and rod options are available depending on your balcony or room measurements.</p>
     </details>
     <details>
-      <summary>How do I get product details and options?</summary>
-      <p>Tap any WhatsApp button on this page or call 9179622121 to speak directly with us.</p>
+      <summary>How do I get product details and availability?</summary>
+      <p>Tap any WhatsApp button on this page or call 9179622121 to connect directly with us.</p>
     </details>
     <details>
-      <summary>Do you service old cloth drying stands?</summary>
-      <p>Yes, rope replacement, pulley check, and servicing support are available.</p>
+      <summary>Do you provide rope replacement and servicing for old stands?</summary>
+      <p>Yes. We offer rope replacement, pulley checks, and servicing support for existing cloth drying systems.</p>
     </details>
   </div>
 </section>
@@ -841,7 +696,7 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
     <div>
       <div class="kicker">GET IN TOUCH</div>
       <h2>Let's set up the right<br>drying system for you.</h2>
-      <p>Reach out for package guidance, balcony measurement, or servicing support in Pune, PCMC, and Mumbai.</p>
+      <p>Reach out on WhatsApp or phone for package details, site measurement, or servicing in Pune, PCMC, and Mumbai.</p>
     </div>
 
     <div class="contact-actions">
@@ -850,7 +705,10 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
         <span><small>CALL DIRECTLY</small><b>9179622121</b></span>
       </a>
 
-      <a class="btn wa-action" href="https://wa.me/919179622121?text=Hello%20Cloth%20Dry%20System%20Pune%2C%20I%20want%20product%20and%20service%20details." target="_blank" rel="noopener">
+      <a class="btn wa-action wa-anim" href="https://wa.me/919179622121?text=Hello%20Cloth%20Dry%20System%20Pune%2C%20I%20want%20product%20and%20service%20details." target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 32 32" fill="white">
+          <path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm7.5 18.3c-.3.9-1.8 1.7-2.5 1.8-.7.1-1.5.2-2.4-.1-.6-.2-1.3-.4-2.2-.8-3.8-1.6-6.3-5.5-6.5-5.8-.2-.3-1.5-2-1.5-3.9s1-2.8 1.3-3.1c.3-.4.8-.5 1-.5h.8c.2 0 .6-.1.9.7.3.8 1.1 2.7 1.2 2.9.1.2.2.4 0 .7-.1.3-.2.4-.4.7-.2.2-.4.5-.6.7-.2.2-.4.4-.2.8.2.4 1 1.6 2.1 2.6 1.5 1.3 2.7 1.7 3.1 1.9.4.2.6.2.8-.1.2-.3 1-1.1 1.2-1.5.3-.4.5-.3.9-.2.4.1 2.3 1.1 2.7 1.3.4.2.7.3.8.5.1.1.1.9-.2 1.8z"/>
+        </svg>
         CHAT ON WHATSAPP ↗
       </a>
     </div>
@@ -864,12 +722,12 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
   <a href="#home" class="logo">
     <span class="logo-badge" aria-hidden="true">
       <svg width="26" height="26" viewBox="0 0 36 36" fill="none">
-        <rect x="5" y="6" width="26" height="3.2" rx="1.6" fill="#f59e0b"/>
-        <line x1="11" y1="9.2" x2="11" y2="15" stroke="#ffffff" stroke-width="2"/>
-        <line x1="25" y1="9.2" x2="25" y2="15" stroke="#ffffff" stroke-width="2"/>
+        <rect x="5" y="6" width="26" height="3.2" rx="1.6" fill="#fbbf24"/>
+        <line x1="11" y1="9.2" x2="11" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        <line x1="25" y1="9.2" x2="25" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
         <rect x="6" y="15.5" width="24" height="2.7" rx="1.35" fill="#ffffff"/>
         <rect x="6" y="20.5" width="24" height="2.7" rx="1.35" fill="#5eead4"/>
-        <rect x="6" y="25.5" width="24" height="2.7" rx="1.35" fill="#f59e0b"/>
+        <rect x="6" y="25.5" width="24" height="2.7" rx="1.35" fill="#fbbf24"/>
       </svg>
     </span>
     <span class="logo-words"><strong>CLOTH DRY SYSTEM</strong><small>P U N E</small></span>
@@ -890,57 +748,94 @@ footer p{font-size:11.5px;color:var(--bw-gray)}
   </div>
 </footer>
 
-<!-- FLOATING WHATSAPP & CALL -->
+<!-- ANIMATED FLOATING WHATSAPP & CALL BUTTONS -->
 <a class="float float-wa" href="https://wa.me/919179622121?text=Hello%20Cloth%20Dry%20System%20Pune" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 32 32" fill="white">
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="white">
     <path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.5L3 29l6.7-1.7c1.9 1 4.1 1.6 6.3 1.6 7.2 0 13-5.8 13-13S23.2 3 16 3zm7.5 18.3c-.3.9-1.8 1.7-2.5 1.8-.7.1-1.5.2-2.4-.1-.6-.2-1.3-.4-2.2-.8-3.8-1.6-6.3-5.5-6.5-5.8-.2-.3-1.5-2-1.5-3.9s1-2.8 1.3-3.1c.3-.4.8-.5 1-.5h.8c.2 0 .6-.1.9.7.3.8 1.1 2.7 1.2 2.9.1.2.2.4 0 .7-.1.3-.2.4-.4.7-.2.2-.4.5-.6.7-.2.2-.4.4-.2.8.2.4 1 1.6 2.1 2.6 1.5 1.3 2.7 1.7 3.1 1.9.4.2.6.2.8-.1.2-.3 1-1.1 1.2-1.5.3-.4.5-.3.9-.2.4.1 2.3 1.1 2.7 1.3.4.2.7.3.8.5.1.1.1.9-.2 1.8z"/>
   </svg>
 </a>
 
 <a class="float float-call" href="tel:+919179622121" aria-label="Call Cloth Dry System Pune">☎</a>
 
-<!-- ADMIN PANEL MODAL -->
+<!-- ADMIN PANEL MODAL (MANAGE 10 HERO SLIDES + PACKAGE & ABOUT PHOTOS) -->
 <div class="admin-overlay" id="adminOverlay">
   <div class="admin-modal">
     <div class="admin-head">
       <div>
-        <h3>1st Page Slideshow Admin</h3>
-        <small style="color:var(--bw-gray)">Add unlimited Firebase photos &amp; descriptions to the hero slider</small>
+        <h3>Firebase Media Admin Panel</h3>
+        <small style="color:var(--bw-gray)">Manage 10 Hero Slideshow photos &amp; About / Package photos</small>
       </div>
       <button type="button" class="close-admin" id="closeAdminBtn" aria-label="Close">✕</button>
     </div>
 
     <div class="admin-status" id="firebaseStatusBanner">Checking Firebase status...</div>
 
-    <form class="admin-form" id="addSlideForm">
-      <div>
-        <label>Slide Label / Tag</label>
-        <input type="text" id="slideTagInput" placeholder="e.g. SLIDE 01 • BALCONY" required>
-      </div>
-      <div>
-        <label>Slide Title</label>
-        <input type="text" id="slideTitleInput" placeholder="e.g. Ceiling Pulley Setup" required>
-      </div>
-      <div class="full">
-        <label>Description</label>
-        <textarea id="slideDescInput" placeholder="Write description for this photo..." required></textarea>
-      </div>
-      <div>
-        <label>Upload Photo File</label>
-        <input type="file" id="slideFileInput" accept="image/*">
-      </div>
-      <div>
-        <label>OR Image URL (Firebase Storage / Link)</label>
-        <input type="url" id="slideUrlInput" placeholder="https://...">
-      </div>
-      <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
-        <button type="submit" class="btn btn-dark" id="saveSlideBtn">+ ADD PHOTO TO SLIDER</button>
-        <button type="button" class="btn btn-outline" id="resetDemoSlidesBtn">Reset Blank Slots</button>
-      </div>
-    </form>
+    <div class="admin-tabs">
+      <button type="button" class="admin-tab active" data-tab="hero">1st Page Slideshow (10 Slots)</button>
+      <button type="button" class="admin-tab" data-tab="cards">About &amp; Package Photos</button>
+    </div>
 
-    <h4 style="font:800 14px Manrope;margin-bottom:12px">Slides (<span id="adminSlideCount">0</span>)</h4>
-    <div class="admin-slides-list" id="adminSlidesList"></div>
+    <!-- TAB 1: HERO 10 SLIDES -->
+    <div id="tabHero">
+      <form class="admin-form" id="addHeroSlideForm">
+        <div>
+          <label>Select Slot (01 to 10) or Add New</label>
+          <select id="heroSlotSelect"></select>
+        </div>
+        <div>
+          <label>Slide Tag / Label</label>
+          <input type="text" id="heroTagInput" placeholder="e.g. BALCONY PULLEY SETUP" required>
+        </div>
+        <div class="full">
+          <label>Slide Heading</label>
+          <input type="text" id="heroTitleInput" placeholder="e.g. Smooth Ceiling Cloth Drying System" required>
+        </div>
+        <div class="full">
+          <label>Photo Description</label>
+          <textarea id="heroDescInput" placeholder="Write description for this photo..." required></textarea>
+        </div>
+        <div>
+          <label>Upload Photo File</label>
+          <input type="file" id="heroFileInput" accept="image/*">
+        </div>
+        <div>
+          <label>OR Image URL (Firebase Storage / Link)</label>
+          <input type="url" id="heroUrlInput" placeholder="https://...">
+        </div>
+        <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="submit" class="btn btn-dark" id="saveHeroSlideBtn">SAVE SLIDE PHOTO</button>
+          <button type="button" class="btn btn-outline" id="resetHero10Btn">Reset All 10 Slots</button>
+        </div>
+      </form>
+
+      <h4 style="font:800 14px Manrope;margin-bottom:10px">10 Slideshow Slots</h4>
+      <div class="admin-list" id="adminHeroList"></div>
+    </div>
+
+    <!-- TAB 2: ABOUT & PACKAGE PHOTOS -->
+    <div id="tabCards" style="display:none">
+      <form class="admin-form" id="updateCardPhotoForm">
+        <div class="full">
+          <label>Choose Section / Package Photo Slot</label>
+          <select id="cardTargetSelect"></select>
+        </div>
+        <div>
+          <label>Upload Photo File</label>
+          <input type="file" id="cardFileInput" accept="image/*">
+        </div>
+        <div>
+          <label>OR Image URL (Firebase Storage / Link)</label>
+          <input type="url" id="cardUrlInput" placeholder="https://...">
+        </div>
+        <div class="full" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="submit" class="btn btn-accent1" id="saveCardPhotoBtn">UPDATE SECTION PHOTO</button>
+          <button type="button" class="btn btn-outline" id="clearCardPhotoBtn">Clear Photo to Blank Slot</button>
+        </div>
+      </form>
+
+      <h4 style="font:800 14px Manrope;margin-bottom:10px">About &amp; Package Photo Slots</h4>
+      <div class="admin-list" id="adminCardList"></div>
+    </div>
   </div>
 </div>
 
@@ -977,143 +872,355 @@ if (isFirebaseConfigured && typeof firebase !== "undefined") {
 }
 
 /* =====================================================================
-   2. BLANK / RESERVED FIREBASE SLOTS FOR 1ST PAGE SLIDER
+   2. 10 RESERVED FIREBASE SLIDES FOR 1ST PAGE SLIDESHOW
    ===================================================================== */
-const RESERVED_SLOTS = [
+function buildDefault10Slides() {
+  return Array.from({ length: 10 }, (_, idx) => {
+    const num = String(idx + 1).padStart(2, "0");
+    return {
+      id: "hero-slot-" + num,
+      slotIndex: idx,
+      tag: `FIREBASE SLIDE ${num} OF 10`,
+      title: `Slideshow Photo ${num} — Title Here`,
+      desc: `Reserved slot ${num} for your Firebase photo & description. Add your photo from Admin Panel.`,
+      imageUrl: ""
+    };
+  });
+}
+
+/* =====================================================================
+   3. PACKAGES & SERVICES DATA (DESCRIPTIONS + FIREBASE PHOTO SLOTS)
+   ===================================================================== */
+const PACKAGES_DATA = [
   {
-    id: "firebase-slot-1",
-    tag: "FIREBASE PHOTO SLOT 01",
-    title: "Your Photo Title Goes Here",
-    desc: "Reserved slot for your Firebase photo & description. Open Admin Panel to upload your image.",
-    imageUrl: ""
+    id: "pkg-ceiling-pulley",
+    badge: "FLAGSHIP PACKAGE",
+    badgeClass: "teal",
+    title: "Ceiling Pulley Drying System",
+    desc: "Multi-rod overhead drying setup designed for balconies and utility spaces. Raise or lower individual rods smoothly using pulley cords so your floor stays open.",
+    points: [
+      "Available in 4-rod, 5-rod & 6-rod options",
+      "Custom rod lengths based on your balcony size",
+      "Neat wall cleat for convenient cord locking"
+    ],
+    waText: "Hello%2C%20please%20share%20details%20for%20the%20Ceiling%20Pulley%20Drying%20System.",
+    cta: "ENQUIRE ON WHATSAPP ↗"
   },
   {
-    id: "firebase-slot-2",
-    tag: "FIREBASE PHOTO SLOT 02",
-    title: "Your Photo Title Goes Here",
-    desc: "Reserved slot for your Firebase photo & description. Open Admin Panel to upload your image.",
-    imageUrl: ""
+    id: "pkg-wall-accordion",
+    badge: "SPACE SAVER",
+    badgeClass: "gold",
+    title: "Wall-Mounted Foldable Stand",
+    desc: "Expandable zig-zag wall drying rack that pulls out when drying clothes and folds compactly against the wall when not in use.",
+    points: [
+      "Ideal for narrow balconies, passages & utility walls",
+      "Smooth folding arm movement with sturdy mounting",
+      "Saves floor space in compact apartments"
+    ],
+    waText: "Hello%2C%20please%20share%20details%20for%20the%20Wall-Mounted%20Foldable%20Stand.",
+    cta: "ENQUIRE ON WHATSAPP ↗"
   },
   {
-    id: "firebase-slot-3",
-    tag: "FIREBASE PHOTO SLOT 03",
-    title: "Your Photo Title Goes Here",
-    desc: "Reserved slot for your Firebase photo & description. Open Admin Panel to upload your image.",
-    imageUrl: ""
+    id: "pkg-heavy-duty",
+    badge: "HEAVY DUTY",
+    badgeClass: "",
+    title: "Heavy-Duty Laundry Package",
+    desc: "Built for households with frequent or heavier laundry loads such as bedsheets, towels, and thick garments, supported by strong anchors and smooth pulleys.",
+    points: [
+      "Durable rust-resistant rod & bracket build",
+      "Balanced cord system for steady lifting",
+      "Suitable for families & daily drying needs"
+    ],
+    waText: "Hello%2C%20please%20share%20details%20for%20the%20Heavy-Duty%20Laundry%20Package.",
+    cta: "ENQUIRE ON WHATSAPP ↗"
+  },
+  {
+    id: "pkg-balcony-railing",
+    badge: "SUNLIGHT DRYING",
+    badgeClass: "teal",
+    title: "Balcony Railing Drying Rack",
+    desc: "Practical railing-mounted drying option for quick exposure to sunlight and natural breeze on apartment balconies.",
+    points: [
+      "Fits standard balcony grills & railings",
+      "Easy to place, remove, or fold as needed",
+      "Convenient for daily wear, towels & light items"
+    ],
+    waText: "Hello%2C%20please%20share%20details%20for%20the%20Balcony%20Railing%20Drying%20Rack.",
+    cta: "ENQUIRE ON WHATSAPP ↗"
+  },
+  {
+    id: "srv-site-visit",
+    badge: "SERVICE • MEASUREMENT",
+    badgeClass: "gold",
+    title: "Home Measurement & Guidance",
+    desc: "Not sure which rod length, count, or mounting spot works best? Book a home visit for accurate measurement and practical setup guidance.",
+    points: [
+      "Balcony & ceiling dimension check",
+      "False ceiling / POP & wall suitability check",
+      "Clear guidance before installation"
+    ],
+    waText: "Hello%2C%20I%20want%20to%20book%20a%20Home%20Measurement%20and%20Guidance%20visit.",
+    cta: "BOOK VISIT ON WHATSAPP ↗"
+  },
+  {
+    id: "srv-repair-care",
+    badge: "SERVICE • REPAIR",
+    badgeClass: "",
+    title: "Rope Replacement & Servicing",
+    desc: "Service and repair support for existing cloth drying stands with worn cords, stiff pulleys, or uneven rod alignment.",
+    points: [
+      "Replacement cords & smooth pulley check",
+      "Rod leveling & bracket tightening",
+      "Doorstep service support across covered areas"
+    ],
+    waText: "Hello%2C%20I%20need%20rope%20replacement%20or%20servicing%20for%20my%20drying%20stand.",
+    cta: "BOOK SERVICE ON WHATSAPP ↗"
   }
 ];
 
-let slidesData = [];
-let currentSlide = 0;
-let sliderTimer = null;
+const CARD_PHOTO_SLOTS = [
+  { id: "about-main", label: "About Us Section Photo" },
+  ...PACKAGES_DATA.map(p => ({ id: p.id, label: p.title + " Photo" }))
+];
 
+let heroSlides = buildDefault10Slides();
+let cardPhotos = {};
+let currentSlide = 0;
+let autoSlideInterval = null;
+let isPaused = false;
+const SLIDE_DURATION = 4200;
+
+/* =====================================================================
+   4. RENDER AUTOMATIC 10-PHOTO SLIDESHOW
+   ===================================================================== */
 const heroSliderEl = document.getElementById("heroSlider");
 const dotsEl = document.getElementById("sliderDots");
 const countEl = document.getElementById("slideCount");
 
-function renderSlideshow(list) {
-  slidesData = list.length ? list : [...RESERVED_SLOTS];
-  if (currentSlide >= slidesData.length) currentSlide = 0;
-
-  heroSliderEl.innerHTML = slidesData.map((s, idx) => `
-    <div class="slide ${idx === currentSlide ? "active" : ""}">
-      ${
-        s.imageUrl
-          ? `<img src="${escapeHtml(s.imageUrl)}" alt="${escapeHtml(s.title)}">`
-          : `<div class="empty-firebase-slot">
-               <div class="slot-frame">+</div>
-               <strong>FIREBASE PHOTO SLOT ${String(idx + 1).padStart(2, "0")}</strong>
-               <small>Add your real photo, heading, and description from the Admin Panel.</small>
-             </div>`
-      }
-      <div class="slide-caption">
-        <span class="slide-tag">${escapeHtml(s.tag || "")}</span>
-        <h3>${escapeHtml(s.title || "")}</h3>
-        <p>${escapeHtml(s.desc || "")}</p>
-      </div>
+function renderHeroSlides() {
+  const progressBar = document.getElementById("slideProgress");
+  heroSliderEl.innerHTML = `
+    <div class="slide-progress-track">
+      <div class="slide-progress-fill" id="slideProgress"></div>
     </div>
-  `).join("");
+    ${heroSlides.map((s, idx) => {
+      const num = String(idx + 1).padStart(2, "0");
+      return `
+        <div class="slide ${idx === currentSlide ? "active" : ""}">
+          ${
+            s.imageUrl
+              ? `<img src="${escapeHtml(s.imageUrl)}" alt="${escapeHtml(s.title)}">`
+              : `<div class="firebase-slot-box">
+                   <div class="slot-ring">${num}</div>
+                   <strong>FIREBASE PHOTO SLOT ${num} / 10</strong>
+                   <small>Add your real photo, title &amp; description for slide ${num} via Admin Panel.</small>
+                 </div>`
+          }
+          <div class="slide-caption">
+            <span class="slide-tag">${escapeHtml(s.tag || `SLIDE ${num}`)}</span>
+            <h3>${escapeHtml(s.title || "")}</h3>
+            <p>${escapeHtml(s.desc || "")}</p>
+          </div>
+        </div>
+      `;
+    }).join("")}
+  `;
 
-  dotsEl.innerHTML = slidesData.map((_, idx) => `
+  dotsEl.innerHTML = heroSlides.map((_, idx) => `
     <button class="${idx === currentSlide ? "active" : ""}" aria-label="Slide ${idx + 1}" data-idx="${idx}"></button>
   `).join("");
 
   dotsEl.querySelectorAll("button").forEach(btn => {
     btn.addEventListener("click", () => {
-      showSlide(Number(btn.dataset.idx));
-      restartSlider();
+      goToSlide(Number(btn.dataset.idx));
     });
   });
 
-  updateCounter();
-  renderAdminList();
+  countEl.textContent = `${String(currentSlide + 1).padStart(2, "0")} / ${String(heroSlides.length).padStart(2, "0")}`;
+  startProgressAnimation();
+  populateAdminLists();
 }
 
-function showSlide(index) {
+function startProgressAnimation() {
+  const bar = document.getElementById("slideProgress");
+  if (!bar) return;
+  bar.style.transition = "none";
+  bar.style.width = "0%";
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (!isPaused) {
+        bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
+        bar.style.width = "100%";
+      }
+    });
+  });
+}
+
+function goToSlide(index) {
+  currentSlide = (index + heroSlides.length) % heroSlides.length;
   const slideEls = heroSliderEl.querySelectorAll(".slide");
   const dotEls = dotsEl.querySelectorAll("button");
-  if (!slideEls.length) return;
-
-  currentSlide = (index + slideEls.length) % slideEls.length;
   slideEls.forEach((el, i) => el.classList.toggle("active", i === currentSlide));
   dotEls.forEach((el, i) => el.classList.toggle("active", i === currentSlide));
-  updateCounter();
+  countEl.textContent = `${String(currentSlide + 1).padStart(2, "0")} / ${String(heroSlides.length).padStart(2, "0")}`;
+  restartAutoSlide();
 }
 
-function updateCounter() {
-  countEl.textContent =
-    String(currentSlide + 1).padStart(2, "0") +
-    " / " +
-    String(slidesData.length).padStart(2, "0");
+function restartAutoSlide() {
+  clearInterval(autoSlideInterval);
+  startProgressAnimation();
+  autoSlideInterval = setInterval(() => {
+    if (!isPaused) {
+      currentSlide = (currentSlide + 1) % heroSlides.length;
+      const slideEls = heroSliderEl.querySelectorAll(".slide");
+      const dotEls = dotsEl.querySelectorAll("button");
+      slideEls.forEach((el, i) => el.classList.toggle("active", i === currentSlide));
+      dotEls.forEach((el, i) => el.classList.toggle("active", i === currentSlide));
+      countEl.textContent = `${String(currentSlide + 1).padStart(2, "0")} / ${String(heroSlides.length).padStart(2, "0")}`;
+      startProgressAnimation();
+    }
+  }, SLIDE_DURATION);
 }
 
-function restartSlider() {
-  clearInterval(sliderTimer);
-  sliderTimer = setInterval(() => showSlide(currentSlide + 1), 5000);
-}
+const sliderWrapEl = document.getElementById("sliderWrap");
+sliderWrapEl.addEventListener("mouseenter", () => { isPaused = true; });
+sliderWrapEl.addEventListener("mouseleave", () => { isPaused = false; restartAutoSlide(); });
 
-document.getElementById("nextSlide").addEventListener("click", () => {
-  showSlide(currentSlide + 1);
-  restartSlider();
-});
-document.getElementById("prevSlide").addEventListener("click", () => {
-  showSlide(currentSlide - 1);
-  restartSlider();
-});
+document.getElementById("nextSlide").addEventListener("click", () => goToSlide(currentSlide + 1));
+document.getElementById("prevSlide").addEventListener("click", () => goToSlide(currentSlide - 1));
 
 /* =====================================================================
-   3. FIREBASE REALTIME SYNC + LOCAL STORAGE FALLBACK
+   5. RENDER ABOUT & PACKAGE CARDS (WITH FIREBASE PHOTO SLOTS)
    ===================================================================== */
-const LOCAL_KEY = "cds_pune_bw_slides_v1";
+function renderCardSections() {
+  const aboutBox = document.getElementById("aboutPhotoSlot");
+  const aboutUrl = cardPhotos["about-main"] || "";
+  aboutBox.innerHTML = aboutUrl
+    ? `<img src="${escapeHtml(aboutUrl)}" alt="Cloth Dry System Pune About">`
+    : `<div class="photo-slot-placeholder">
+         <span class="tag-pill">FIREBASE PHOTO SLOT • ABOUT US</span>
+         <strong>Add About Us Photo</strong>
+         <small>Upload or paste your Firebase image URL in Admin Panel → About &amp; Package Photos.</small>
+       </div>`;
 
-function loadSlides() {
-  if (db) {
-    db.collection("hero_slides")
-      .orderBy("createdAt", "asc")
-      .onSnapshot(snapshot => {
-        const items = [];
-        snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
-        renderSlideshow(items.length ? items : RESERVED_SLOTS);
-      }, () => loadFromLocal());
-  } else {
-    loadFromLocal();
-  }
-}
+  const pkgGrid = document.getElementById("packagesGrid");
+  pkgGrid.innerHTML = PACKAGES_DATA.map((p, idx) => {
+    const imgUrl = cardPhotos[p.id] || "";
+    const slotNum = String(idx + 1).padStart(2, "0");
+    return `
+      <article class="pkg-card reveal visible">
+        <div class="pkg-photo">
+          <span class="pkg-badge ${p.badgeClass}">${escapeHtml(p.badge)}</span>
+          ${
+            imgUrl
+              ? `<img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(p.title)}">`
+              : `<div class="photo-slot-placeholder">
+                   <span class="tag-pill">FIREBASE SLOT ${slotNum}</span>
+                   <strong>${escapeHtml(p.title)}</strong>
+                   <small>Reserved photo slot — add your image from Admin Panel.</small>
+                 </div>`
+          }
+        </div>
+        <div class="pkg-body">
+          <h3>${escapeHtml(p.title)}</h3>
+          <p>${escapeHtml(p.desc)}</p>
+          <ul class="pkg-list">
+            ${p.points.map(pt => `<li>${escapeHtml(pt)}</li>`).join("")}
+          </ul>
+          <a class="pkg-btn wa-anim" href="https://wa.me/919179622121?text=${p.waText}" target="_blank" rel="noopener">
+            ${escapeHtml(p.cta)}
+          </a>
+        </div>
+      </article>
+    `;
+  }).join("");
 
-function loadFromLocal() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(LOCAL_KEY) || "null");
-    renderSlideshow(Array.isArray(saved) && saved.length ? saved : RESERVED_SLOTS);
-  } catch {
-    renderSlideshow(RESERVED_SLOTS);
-  }
+  populateAdminLists();
 }
 
 /* =====================================================================
-   4. ADMIN PANEL
+   6. FIREBASE SYNC + LOCAL STORAGE FALLBACK
+   ===================================================================== */
+const LOCAL_HERO_KEY = "cds_pune_10_hero_slides_v1";
+const LOCAL_CARDS_KEY = "cds_pune_card_photos_v1";
+
+function loadAllMedia() {
+  if (db) {
+    db.collection("hero_10_slides").orderBy("slotIndex", "asc").onSnapshot(snap => {
+      const defaults = buildDefault10Slides();
+      snap.forEach(doc => {
+        const d = doc.data();
+        if (typeof d.slotIndex === "number" && defaults[d.slotIndex]) {
+          defaults[d.slotIndex] = { id: doc.id, ...d };
+        }
+      });
+      heroSlides = defaults;
+      renderHeroSlides();
+    });
+
+    db.collection("site_photos").onSnapshot(snap => {
+      const map = {};
+      snap.forEach(doc => { map[doc.id] = doc.data().imageUrl || ""; });
+      cardPhotos = map;
+      renderCardSections();
+    });
+  } else {
+    try {
+      const savedHero = JSON.parse(localStorage.getItem(LOCAL_HERO_KEY) || "null");
+      if (Array.isArray(savedHero) && savedHero.length === 10) heroSlides = savedHero;
+    } catch {}
+    try {
+      const savedCards = JSON.parse(localStorage.getItem(LOCAL_CARDS_KEY) || "{}");
+      if (savedCards && typeof savedCards === "object") cardPhotos = savedCards;
+    } catch {}
+    renderHeroSlides();
+    renderCardSections();
+  }
+}
+
+function saveLocalHero() {
+  localStorage.setItem(LOCAL_HERO_KEY, JSON.stringify(heroSlides));
+}
+function saveLocalCards() {
+  localStorage.setItem(LOCAL_CARDS_KEY, JSON.stringify(cardPhotos));
+}
+
+/* =====================================================================
+   7. ADMIN PANEL (10 HERO SLIDES + ABOUT & PACKAGE PHOTOS)
    ===================================================================== */
 const adminOverlay = document.getElementById("adminOverlay");
 const statusBanner = document.getElementById("firebaseStatusBanner");
+const heroSlotSelect = document.getElementById("heroSlotSelect");
+const cardTargetSelect = document.getElementById("cardTargetSelect");
+
+heroSlotSelect.innerHTML = Array.from({ length: 10 }, (_, i) => {
+  const n = String(i + 1).padStart(2, "0");
+  return `<option value="${i}">Slot ${n} (Slide ${n} of 10)</option>`;
+}).join("");
+
+cardTargetSelect.innerHTML = CARD_PHOTO_SLOTS.map(c =>
+  `<option value="${c.id}">${escapeHtml(c.label)}</option>`
+).join("");
+
+function syncFormWithSelectedSlot() {
+  const idx = Number(heroSlotSelect.value) || 0;
+  const s = heroSlides[idx] || {};
+  document.getElementById("heroTagInput").value = s.tag || "";
+  document.getElementById("heroTitleInput").value = s.title || "";
+  document.getElementById("heroDescInput").value = s.desc || "";
+  document.getElementById("heroUrlInput").value = s.imageUrl && !s.imageUrl.startsWith("data:") ? s.imageUrl : "";
+}
+heroSlotSelect.addEventListener("change", syncFormWithSelectedSlot);
+
+document.querySelectorAll(".admin-tab").forEach(tabBtn => {
+  tabBtn.addEventListener("click", () => {
+    document.querySelectorAll(".admin-tab").forEach(b => b.classList.remove("active"));
+    tabBtn.classList.add("active");
+    const isHero = tabBtn.dataset.tab === "hero";
+    document.getElementById("tabHero").style.display = isHero ? "block" : "none";
+    document.getElementById("tabCards").style.display = isHero ? "none" : "block";
+  });
+});
 
 function openAdminPanel() {
   const pin = prompt("Enter Admin PIN:");
@@ -1122,111 +1229,182 @@ function openAdminPanel() {
     alert("Incorrect PIN.");
     return;
   }
-
   statusBanner.innerHTML = isFirebaseConfigured
-    ? "<b>Firebase Live:</b> Added slides sync to Firestore &amp; Storage."
-    : "<b>Local Preview:</b> Slides save locally until you paste your <code>firebaseConfig</code>.";
+    ? "<b>Firebase Connected:</b> Changes save directly to Firebase Firestore &amp; Storage."
+    : "<b>Browser Preview Mode:</b> Photos save locally in this browser until you add your <code>firebaseConfig</code> in the code.";
 
+  syncFormWithSelectedSlot();
   adminOverlay.classList.add("open");
-  renderAdminList();
 }
 
 document.getElementById("openAdminBtn").addEventListener("click", openAdminPanel);
 document.getElementById("closeAdminBtn").addEventListener("click", () => adminOverlay.classList.remove("open"));
 if (window.location.hash === "#admin") openAdminPanel();
 
-document.getElementById("addSlideForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const saveBtn = document.getElementById("saveSlideBtn");
-  const tag = document.getElementById("slideTagInput").value.trim();
-  const title = document.getElementById("slideTitleInput").value.trim();
-  const desc = document.getElementById("slideDescInput").value.trim();
-  const file = document.getElementById("slideFileInput").files[0];
-  let imageUrl = document.getElementById("slideUrlInput").value.trim();
-
-  if (!file && !imageUrl) {
-    alert("Select a photo file or enter an image URL.");
-    return;
+async function resolveImageInput(fileInputId, urlInputId, folder) {
+  const file = document.getElementById(fileInputId).files[0];
+  let url = document.getElementById(urlInputId).value.trim();
+  if (file) {
+    if (storage) {
+      const ref = storage.ref(`${folder}/${Date.now()}_${file.name}`);
+      await ref.put(file);
+      url = await ref.getDownloadURL();
+    } else {
+      url = await fileToDataUrl(file);
+    }
   }
+  return url;
+}
 
-  saveBtn.disabled = true;
-  saveBtn.textContent = "SAVING...";
+document.getElementById("addHeroSlideForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("saveHeroSlideBtn");
+  const idx = Number(heroSlotSelect.value) || 0;
+  const tag = document.getElementById("heroTagInput").value.trim();
+  const title = document.getElementById("heroTitleInput").value.trim();
+  const desc = document.getElementById("heroDescInput").value.trim();
+
+  btn.disabled = true;
+  btn.textContent = "SAVING...";
 
   try {
-    if (file) {
-      if (storage) {
-        const ref = storage.ref(`hero_slides/${Date.now()}_${file.name}`);
-        await ref.put(file);
-        imageUrl = await ref.getDownloadURL();
-      } else {
-        imageUrl = await fileToDataUrl(file);
-      }
-    }
-
-    const newSlide = { tag, title, desc, imageUrl, createdAt: Date.now() };
+    const newUrl = await resolveImageInput("heroFileInput", "heroUrlInput", "hero_10_slides");
+    const finalUrl = newUrl || (heroSlides[idx] ? heroSlides[idx].imageUrl : "");
+    const payload = {
+      slotIndex: idx,
+      tag,
+      title,
+      desc,
+      imageUrl: finalUrl,
+      updatedAt: Date.now()
+    };
 
     if (db) {
-      await db.collection("hero_slides").add(newSlide);
+      await db.collection("hero_10_slides").doc(heroSlides[idx].id).set(payload, { merge: true });
     } else {
-      const current = slidesData.filter(s => !String(s.id).startsWith("firebase-slot-"));
-      current.push({ id: "local-" + Date.now(), ...newSlide });
-      localStorage.setItem(LOCAL_KEY, JSON.stringify(current));
-      renderSlideshow(current);
+      heroSlides[idx] = { ...heroSlides[idx], ...payload };
+      saveLocalHero();
+      renderHeroSlides();
     }
 
-    e.target.reset();
-    showSlide(slidesData.length - 1);
+    document.getElementById("heroFileInput").value = "";
+    goToSlide(idx);
   } catch (err) {
     alert("Error: " + err.message);
   } finally {
-    saveBtn.disabled = false;
-    saveBtn.textContent = "+ ADD PHOTO TO SLIDER";
+    btn.disabled = false;
+    btn.textContent = "SAVE SLIDE PHOTO";
   }
 });
 
-document.getElementById("resetDemoSlidesBtn").addEventListener("click", async () => {
-  if (!confirm("Reset back to blank Firebase slots?")) return;
-  localStorage.removeItem(LOCAL_KEY);
+document.getElementById("resetHero10Btn").addEventListener("click", async () => {
+  if (!confirm("Reset all 10 hero slideshow slots to blank?")) return;
+  localStorage.removeItem(LOCAL_HERO_KEY);
   if (db) {
-    const snap = await db.collection("hero_slides").get();
+    const snap = await db.collection("hero_10_slides").get();
     const batch = db.batch();
     snap.forEach(doc => batch.delete(doc.ref));
     await batch.commit();
-  } else {
-    renderSlideshow(RESERVED_SLOTS);
+  }
+  heroSlides = buildDefault10Slides();
+  renderHeroSlides();
+  syncFormWithSelectedSlot();
+});
+
+document.getElementById("updateCardPhotoForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("saveCardPhotoBtn");
+  const targetId = cardTargetSelect.value;
+  btn.disabled = true;
+  btn.textContent = "UPDATING...";
+
+  try {
+    const url = await resolveImageInput("cardFileInput", "cardUrlInput", "site_photos");
+    if (!url) {
+      alert("Please choose a photo file or enter an image URL.");
+      return;
+    }
+    if (db) {
+      await db.collection("site_photos").doc(targetId).set({ imageUrl: url, updatedAt: Date.now() });
+    } else {
+      cardPhotos[targetId] = url;
+      saveLocalCards();
+      renderCardSections();
+    }
+    document.getElementById("cardFileInput").value = "";
+    document.getElementById("cardUrlInput").value = "";
+  } catch (err) {
+    alert("Error: " + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "UPDATE SECTION PHOTO";
   }
 });
 
-function renderAdminList() {
-  const listEl = document.getElementById("adminSlidesList");
-  document.getElementById("adminSlideCount").textContent = slidesData.length;
-
-  listEl.innerHTML = slidesData.map(s => `
-    <div class="admin-slide-item">
-      ${
-        s.imageUrl
-          ? `<img class="admin-slide-thumb" src="${escapeHtml(s.imageUrl)}" alt="">`
-          : `<div class="admin-slide-thumb">EMPTY</div>`
-      }
-      <div class="admin-slide-meta">
-        <b>${escapeHtml(s.title)}</b>
-        <small>${escapeHtml(s.tag)} — ${escapeHtml(s.desc)}</small>
-      </div>
-      <button type="button" class="del-btn" onclick="deleteSlide('${s.id}')">Delete</button>
-    </div>
-  `).join("");
-}
-
-window.deleteSlide = async function(id) {
-  if (!confirm("Delete this slide?")) return;
-  if (db && !String(id).startsWith("firebase-slot-") && !String(id).startsWith("local-")) {
-    await db.collection("hero_slides").doc(id).delete();
+document.getElementById("clearCardPhotoBtn").addEventListener("click", async () => {
+  const targetId = cardTargetSelect.value;
+  if (db) {
+    await db.collection("site_photos").doc(targetId).delete().catch(() => {});
   } else {
-    const updated = slidesData.filter(s => s.id !== id);
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(updated));
-    renderSlideshow(updated.length ? updated : RESERVED_SLOTS);
+    delete cardPhotos[targetId];
+    saveLocalCards();
+    renderCardSections();
+  }
+});
+
+window.clearHeroSlot = async function(idx) {
+  const defaults = buildDefault10Slides()[idx];
+  if (db) {
+    await db.collection("hero_10_slides").doc(heroSlides[idx].id).set(defaults);
+  } else {
+    heroSlides[idx] = defaults;
+    saveLocalHero();
+    renderHeroSlides();
   }
 };
+
+function populateAdminLists() {
+  const heroListEl = document.getElementById("adminHeroList");
+  if (heroListEl) {
+    heroListEl.innerHTML = heroSlides.map((s, idx) => {
+      const n = String(idx + 1).padStart(2, "0");
+      return `
+        <div class="admin-item">
+          ${
+            s.imageUrl
+              ? `<img class="admin-thumb" src="${escapeHtml(s.imageUrl)}" alt="">`
+              : `<div class="admin-thumb">${n}/10</div>`
+          }
+          <div class="admin-meta">
+            <b>Slot ${n}: ${escapeHtml(s.title)}</b>
+            <small>${escapeHtml(s.tag)} — ${escapeHtml(s.desc)}</small>
+          </div>
+          <button type="button" class="del-btn" onclick="clearHeroSlot(${idx})">Clear</button>
+        </div>
+      `;
+    }).join("");
+  }
+
+  const cardListEl = document.getElementById("adminCardList");
+  if (cardListEl) {
+    cardListEl.innerHTML = CARD_PHOTO_SLOTS.map(c => {
+      const u = cardPhotos[c.id] || "";
+      return `
+        <div class="admin-item">
+          ${
+            u
+              ? `<img class="admin-thumb" src="${escapeHtml(u)}" alt="">`
+              : `<div class="admin-thumb">SLOT</div>`
+          }
+          <div class="admin-meta">
+            <b>${escapeHtml(c.label)}</b>
+            <small>${u ? "Photo added" : "Blank Firebase photo slot"}</small>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+}
 
 function fileToDataUrl(file) {
   return new Promise((resolve, reject) => {
@@ -1246,7 +1424,7 @@ function escapeHtml(str) {
 }
 
 /* =====================================================================
-   5. MENU & SCROLL ANIMATIONS
+   8. DYNAMIC SCROLL PROGRESS, MENU & REVEAL ANIMATIONS
    ===================================================================== */
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -1255,6 +1433,13 @@ const nav = document.getElementById("nav");
 menuBtn.addEventListener("click", () => nav.classList.toggle("open"));
 nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
 
+const progressEl = document.getElementById("scrollProgress");
+window.addEventListener("scroll", () => {
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0;
+  progressEl.style.width = pct + "%";
+}, { passive: true });
+
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -1262,8 +1447,9 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-loadSlides();
-restartSlider();
+/* INIT */
+loadAllMedia();
+restartAutoSlide();
 </script>
 
 </body>
